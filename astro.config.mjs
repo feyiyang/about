@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 // import vercel from '@astrojs/vercel/serverless';
 import netlify from '@astrojs/netlify/functions';
+// import netlify from '@astrojs/netlify/edge-functions';
 
 import sitemap from '@astrojs/sitemap';
 
