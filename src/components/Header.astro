@@ -3,23 +3,61 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../config';
 ---
 
-<header>
-	<h2>
-		{SITE_TITLE}
-	</h2>
-	<nav>
-		<HeaderLink href="/">Home</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-		<HeaderLink href="/about">About</HeaderLink>
-		<!-- <HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink> -->
-		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
-	</nav>
+<header class="header">
+	<div class="header_inner">
+		<div class="glass"></div>
+		<nav>
+			<HeaderLink class="item" href="/">扉漆</HeaderLink>
+			<HeaderLink class="item" href="/blog">博客</HeaderLink>
+			<HeaderLink class="item" href="/about">关于</HeaderLink>
+		</nav>
+	</div>
 </header>
-<style>
-	header {
-		margin: 0em 0 2em;
+<style lang="less">
+@import '../styles/var.less';	
+@main_hei: 40px;
+.header {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: @main_hei;
+	font-size: 16px;
+	.header_inner {
+		width: 960px;
+		margin: 0 auto;
+		background-color: @bg_grey;
+		box-shadow: 0 1px 3px rgba(160, 160, 175, 0.2);
 	}
-	h2 {
-		margin: 0.5em 0;
+	nav{
+		display: flex;
 	}
+	.item{
+		position: relative;
+		display: inline-block;
+		width: 130px;
+		height: 100%;
+		margin: 0;
+		text-align: center;
+		line-height: @main_hei;
+		color: @text_blank;
+		background-color: @bg_blue;
+		&:not(:last-of-type)::after{
+			content: ' ';
+			position: absolute;
+			right: 1px;
+			top: 12px;
+			width: 2px;
+			height: 12px;
+			background-color: @bg_green;
+		}
+	}
+	.glass {
+		float: right;
+		width: @main_hei;
+		height: @main_hei;
+		background: url(/glassdoor.svg) center no-repeat;
+		background-size: auto 18px;
+	}
+}
 </style>
