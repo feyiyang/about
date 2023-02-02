@@ -1,123 +1,162 @@
-@import './var.less';
+@import "./var.less";
 
 @font-face {
-  font-family: 'CoolFont';
-  src: url('/fonts/hhght.100.otf') format('otf');
+  font-family: "CoolFont";
+  src: url("/fonts/hhght.100.otf") format("otf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-	font-family: 'Harmmony';
-	src: url(/fonts/HarmonyOS_Sans_Medium.ttf) format('ttf');
+  font-family: "Harmmony";
+  src: url(/fonts/HarmonyOS_Sans_Medium.ttf) format("ttf");
   font-weight: medium;
   font-style: normal;
   font-display: swap;
 }
-*{
-	padding: 0;
-	margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
-html, body {
+html,
+body {
   width: 100%;
-  height: 100%;
 }
 html {
-	background: url(/bg.gif);
-	background-size: 760px;
+  background: url(/bg.gif);
+  background-size: 760px;
 }
 body {
-	font-size: 14px;
-	font-family: Verdana, sans-serif, 'Microsoft YaHei';
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	line-height: 1.6;
-	color: #585141;
-	backdrop-filter: opacity(0.4) blur(86px);
-}
-ul,
-li,
-ol {
-	list-style: none;
+  font-size: 14px;
+  font-family: Verdana, sans-serif, "Microsoft YaHei";
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.6;
+  color: #585141;
 }
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-strong,
-b {
-	font-family: 'Harmmony', 'CoolFont';
-	font-weight: 500;
-	color: @text_blank;
+h6{
+  font-family: "Harmmony", "CoolFont";
+  font-weight: 500;
+  color: @text_blank;
 }
 a {
   color: @text_blue;
   text-decoration: none;
-	&:visited {
-		color: inherit;
-	}
+  &:visited {
+    color: #589dd6;
+  }
 }
 table {
-	width: 100%;
+  width: 100%;
 }
 img {
-	max-width: 100%;
-	height: auto;
+  max-width: 100%;
+  height: auto;
 }
 code {
-	padding: 2px 5px;
-	background-color: #f2f2f2;
+  padding: 2px 5px;
+  background-color: #d8d7ef;
 }
 pre {
-	padding: 1rem;
+  padding: 1rem;
 }
 pre > code {
-	all: unset;
+  all: unset;
 }
 blockquote {
-	padding: 5px 0px 5px 20px;
-	margin: 5px 0;
-	border: 1px solid #bfbfb3;
-	border-radius: 2px;
-	color: #222;
-	font-style: normal;
-	background-color: #fff;
+  // padding: 10px 1em 10px 3em;
+  margin: 5px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  color: #5d4560;
+  font-style: normal;
+  background-color: #fff;
+  .qout {
+    display: block;
+    height: 12px;
+    overflow: hidden;
+    font-weight: 700;
+    background-color: #d9dde7;
+  }
+  // &::before {
+  //   content: "“";
+  //   .qout;
+  // }
+  &::after {
+    content: "”";
+    .qout;
+    padding-right: 10px;
+    text-align: right;
+  }
+  p {
+    padding: 5px 15px;
+  }
 }
 #main {
-	width: 920px;
-	padding: 70px 20px 20px;
-	margin: 0 auto;
-	background-color: @bg_grey;
-	background-image: url(/cbg.png);
-	background-repeat: no-repeat;
-	background-position: right calc(100% + 50px);
-	background-size: 90px auto;
+  .wrap_inner;
+  padding: 70px 0 20px;
+  background-color: @bg_grey;
+  background-image: url(/cbg.png);
+  background-repeat: no-repeat;
+  background-position: right calc(100% + 60px);
+  background-size: 90px auto;
+  > .article {
+    padding: 0 20px;
+    position: relative;
+    word-break: break-all;
+    
+  }
 }
 article {
-	> h1 {
-		font-size: 20px;
-		margin: 0.4em 0 0.1em;
-	}
-	> h2 {
-		font-size: 18px;
-		margin: 0.5em 0 0.1em 0.2em;
-	}
-	> h3 {
-		font-size: 16px;
-		margin: 0.3em 0 0 0.5em;
-	}
-	> h4, h5 {
-		font-size: 14px;
-	}
-	ul, ol {
-		padding-inline-start: 2em;
-	}
-	li {
-		list-style: auto;
-	}
-	> p {
-		padding: 0.5em 2em;
-	}
+  > h1 {
+    margin: 0.4em 0 0.1em;
+    font-size: 18px;
+  }
+  > h2 {
+    padding: 0.5em 0 0.1em;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  > h3 {
+    padding: 0.3em 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666555;
+  }
+  ul,
+  ol {
+    padding-inline-start: 2em;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+  > p {
+    padding: 7px 2em;
+  }
+  .astro-code {
+    display: block;
+    margin: 10px 2em;
+    background-color: #1f1d2b !important;
+    border-left: 5px solid @bg_grey;
+  }
+  pre > code {
+    border: 0;
+    display: inline;
+    max-width: initial;
+    overflow: initial;
+    line-height: inherit;
+    white-space: pre-wrap;
+    background: 0 0;
+  }
+  code {
+    color: #666555;
+  }
+  hr.none {
+    border: none;
+  }
 }

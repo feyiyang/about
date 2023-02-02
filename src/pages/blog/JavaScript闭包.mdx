@@ -1,0 +1,70 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: 理解JavaScript中的闭包
+draft: true
+blogs: [
+  { from: "cnblogs", link: "https://www.cnblogs.com/feYiyang/p/10414493.html" }
+]
+description: "前面学习作用域的特性我们知道，doFun创建的作用域中的变量对象(VO，即所有var变量声明和函数声明FD)是可以被内部函数displayName访问到的。而内部函数displayName被声明后没有立即执行，而是作为返回值赋值给了myFun。当内部函数被myFun调用时仍可访问较高作用域的变量，此时就会形成闭包。 "
+pubDate: "2019/02/21"
+heroImage: ""
+tag:
+  - 前端
+  - javascript
+---
+
+Javascript中，函数（称高阶函数HOF）可以接收函数作为参数， 也可以把函数作为结果返回。  
+
+```js
+function doFun() {
+    var name = "jensen";
+    function displayName() {
+        console.log(name);
+    }
+    return displayName;
+}
+
+var myFun = doFun();
+myFun();    // 'jensen'
+```
+
+前面学习作用域的特性我们知道，doFun创建的作用域中的变量对象(VO，即所有var变量声明和函数声明FD)是可以被内部函数displayName访问到的。而内部函数displayName被声明后没有立即执行，而是作为返回值赋值给了myFun。当内部函数被myFun调用时仍可访问较高作用域的变量，此时就会形成闭包。  
+
+我们来看闭包的官方定义：“闭包，指的是词法表示包括不被计算的变量的函数，也就是说，函数可以使用函数之外定义的变量。” 和MDN中的定义： “闭包是由函数以及创建该函数的词法环境上下文数据)组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。” 注：作用域有两种工作模型：词法作用域和动态作用域 。这些定义应该不算难理解。从理论上来说， javascript中所有的函数都是闭包。然而实践中，我们更多的时候认为额外创建一个函数的方式是最有效和更为强大的。如篇头的高阶函数， 以及可以模拟私有方法 -- 下面的示例展现了如何使用闭包来定义公共函数，并令其可以访问私有函数和变量。这个方式也称为 模块模式（module pattern）。  
+
+```js
+var Counter = (function() {
+  var private = 0;
+  function changeVal(val) {
+    private += val;
+  }
+  return {
+    increment: function() {
+      changeVal(1);
+    },
+    decrement: function() {
+      changeVal(-1);
+    },
+    value: function() {
+      return private;
+    }
+  }   
+})();
+
+console.log(Counter.value()); /* logs 0 */
+Counter.increment();
+Counter.increment();
+console.log(Counter.value()); /* logs 2 */
+Counter.decrement();
+console.log(Counter.value()); /* logs 1 */
+```
+
+这个环境中包含两个私有项：名为 private的变量和名为 changeVal 的函数。这两项都无法在这个匿名函数外部直接访问。必须通过匿名函数返回的三个公共函数访问。  
+
+在函数是一等 (first-class) 变量的语言中（比如 JavaScript），创建闭包的环境中的变量总是可以被访问的行为非常重要，因为函数的生命周期决定了函数可以看到的数据元素的生命周期。在此环境中，很容易由于疏忽而在内存中保留比期望的多得多的数据，这样做很危险。  
+
+ JavaScript 是一个多范式语言，允许你自由地混合和使用面向对象式、过程式和函数式的编程范式。  
+
+高阶函数是符合函数式编程范式的，随着react的火热 有时间需要学习函数式编程，移步Js函数式编程指南   JavaScript 中的函数式编程实践  函数式编程入门教程。以下先把需要大致理解的几点罗列下参考：数学模型的集合 -  函数是一等公民 - 函数必须是纯的没有副作用 - 柯里化 - 范畴学  - 应用。  
+
+ 

@@ -1,0 +1,180 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "理解javascript面向对象"
+blogs: [
+  { from: "cnblogs", link: "https://www.cnblogs.com/feYiyang/p/8269907.html" }
+]
+description: "思维逻辑可以抽象进而工具化、工程化。面向对象-编程借鉴工程领域来的思维抽象。\n在基于类的面向对象方式中，对象（object）依靠 类（class）来产生。而在基于原型的面向对象方式中，对象（object）则是依靠 构造器（constructor）利用 原型（prototype）构造出来的。"
+pubDate: "2018/01/17"
+heroImage: ""
+tag:
+  - 前端
+  - javascript
+---
+import SideNave from '../../components/SideNav.vue';
+
+<SideNave>  
+
+{/*
+<!-- vscode-markdown-toc -->
+*/}
+- [面向对象的能力、概念](#面向对象的能力概念)
+- [数据类型](#数据类型)
+- [创建对象](#创建对象)
+- [typeOf、valueof](#typeofvalueof)
+  - [typeof](#typeof)
+  - [valueof](#valueof)
+
+{/*
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+*/}
+</SideNave>
+
+## <a name=''></a>面向对象的能力、概念
+能力  
+
+- 继承 - 由另一个类（或多个类）得来类的属性和方法的能力 （子孙继承父辈祖辈的能力）
+- 多态 - 编写能以多种方法运行的函数或方法的能力（普通话和方言的关系）
+- 封装、聚集 - 存储信息到对象，并且对象与对象之间使用消息通信，各自存在信息隐藏
+
+概念  
+
+在基于类的面向对象方式中，对象（object）依靠 类（class）来产生。而在基于原型的面向对象方式中，对象（object）则是依靠 构造器（constructor）利用 原型（prototype）构造出来的。  
+  
+> ES6定义：ECMA-262 把对象（object）定义为“属性的无序集合，每个属性存放一个原始值、对象或函数”，对象也可以包含对象。   
+构成：在 ECMAScript 中，对象由特性（attribute）构成，特性可以是原始值，也可以是引用值。如果特性存放的是函数，它将被看作对象的方法（method），否则该特性被看作对象的属性（property）。  
+
+方法与属性很相似， 不同的是：一个是函数，另一个可以被定义为函数。JavaScript可用方法作类 如：`Function Method(){}`。  
+
+## <a name='-1'></a>数据类型   
+在 ECMAScript 中，变量可以存在两种类型的值，即原始值和引用值。ECMAScript的5种基本数据类型即 Boolean、Number、String、Null、Undefined为原始类型。而复杂数据类型Object为引用类型。Object对象是描述ECMAScript对象的唯一一个数据类型，JavaScript 中的每个对象都是 Object对象的实例且继承它所有的属性和方法。所以理解了 Object对象，就可以更好地理解其他对象。  
+
+Object 对象有下列属性和方法：  
+  
+constructor  
+ 对创建对象的函数的引用（指针）。  
+ Prototype  
+ 对该对象的对象原型的引用。对于所有的对象，它默认返回 Object 对象的一个实例。  
+ hasOwnProperty(property)  
+ 判断对象是否有某个特定的属性。必须用字符串指定该属性。（例如，o.hasOwnProperty("name")）  
+ IsPrototypeOf(object)  
+ 判断该对象是否为另一个对象的原型。  
+ PropertyIsEnumerable  
+ 判断给定的属性是否可以用 for...in 语句进行枚举。  
+ ToString()  
+ 返回对象的原始字符串表示。  
+ ValueOf()  
+ 返回最适合该对象的原始值。对于许多对象，该方法返回的值都与 ToString() 的返回值相同。  
+ 原始类型的引用类型 - 定义一个变量为 new Boolean(boolean)/new Number(number)/ new String(string)  注意括号中为具体的原始值，即是各个原始类型的引用类型。ECMAScript 还为数字类型、字符类型提供了一些辅助其解析和操作的属性和方法。  
+  
+## <a name='-1'></a>创建对象  
+对象类型：一般来说，可以创建并使用的对象有三种：本地对象、内置对象和宿主对象。本地对象就是 ECMA-262 定义的类（引用类型）包括：Object、Function、Array、Date、RegExp...等。Global 和 Math 是内置对象（它们也是本地对象，根据定义，每个内置对象都是本地对象）。所有 BOM 和 DOM 对象都是宿主对象。  
+  
+字面式(literal notation)声明是创建对象的最简单方式。  
+```js
+//var array = new Array(1, 2, 3);  
+var array = [1, 2, 3];
+
+//var object = new Object();
+//object.x = 1;
+//object.y = 2;
+//object.z = -3;
+var object = {x:1, y:2, z:-3};
+//json 构造语法开发者可以随意地用字面式声明方式来构造一个对象，并对其不存在的属性赋值，或者用delete将属性删除。
+object.fn = function(){};
+delete object["z"];
+console.log(object);　　//{x: 1, y: 2, fn: ƒ()}
+```
+通过构造器(constructor)创建对象，这里每个构造器实际上是一个函数(function)对象，该函数对象含有一个"prototype"属性用于实现"基于原型的继承"和“共享属性”。
+```js
+function createCar() {
+  var oTempCar = new Object;
+  oTempCar.color = "blue";
+  oTempCar.doors = 4;
+  oTempCar.mpg = 25;
+  oTempCar.showColor = function() {
+    alert(this.color);
+  };
+  return oTempCar;
+}
+var oCar1 = createCar();
+var oCar2 = createCar();
+function Phone(pColor, pBrand, pPrice){
+    this.color = pColor;
+    this.brand = pBrand;
+    this.pPrice = pPrice;
+    this.showColor = function(){
+        alert(this.color);
+    }
+}
+var oPhone = new Phone("red","iphone",2333);
+var oPhone = new Phone("blue","huawei",2666);
+//实质上，JS 这里仅仅是借用了关键字 new 
+```
+原型方式，每个由构造器创建的对象拥有一个指向构造器prototype属性值的隐式引用，这个引用称之为原型。进一步，每个原型可以拥有指向自己原型的隐式引用(__proto__)，如此循环下去就是所谓的原型链。
+```js
+function Phone(){}
+Phone.prototype.color = "red";
+Phone.prototype.brand = "iphone";
+Phone.prototype.showColor = function(){console.log(this.color)};  //red
+var p = new Phone(); 
+//对象的隐式引用指向了构造器的 prototype 属性，所以此处打印 true 
+console.log( p.__proto__ === Phone.prototype ); 
+//原型本身是一个 Object 对象，所以他的隐式引用指向了Object 构造器的 prototype 属性 , 故而打印 true 
+console.log(Phone.prototype.__proto__ === Object.prototype ); 
+// 构造器 Phone本身是一个函数对象，所以此处打印 true
+console.log( Phone.__proto__ === Function.prototype );
+```
+
+## <a name='typeOfvalueof'></a>typeOf、valueof   
+
+### typeof
+对变量或值调用typeof运算符将返回以下值之一“undefined、boolean、number、string、object”。typeof是对基本数据类型判断的最佳工具。
+```js
+console.log(typeof undefined)    //"undefined"
+console.log(typeof true)      //"boolean"
+console.log(typeof 2)      //"number"
+console.log(typeof "string")      //"string"
+console.log(typeof null)      //"object"
+console.log(typeof {})      //"object"
+```
+
+JavaScript中的每个对象都是Object对象的实例且继承它所有的属性和方法。
+```js
+console.log(typeof Object)    //"function"  返回了对象的function构造函数
+console.log(typeof Boolean)    //"function"  同上，我们可以证明
+console.log(typeof Object  === typeof Boolean)    //true
+
+//检查变量
+var obj = new Object();
+console.log(typeof obj)    //"object"  :变量类型为引用类型
+
+var boolean = new Boolean();
+console.log(typeof boolean);    //"object"  :变量类型为引用类型
+
+console.log(Object.constructor === Boolean.constructor);    //true
+```
+### valueof 
+返回最适合该对象的原始值，该方法都属于Object对象的继承。对于许多对象，该方法返回的值都与 ToString() 的返回值相同。 
+
+```js
+var boolean = true;
+console.log(boolean.valueOf()); //true
+
+var arr = [];
+console.log(arr.valueOf())  //[]
+
+var num = 6;
+console.log(num.valueOf()); //6
+``` 
+
+ 
+
+参考  
+ https://www.ibm.com/developerworks/cn/web/1304_zengyz_jsoo/   
+ http://www.w3school.com.cn/js/pro_js_object_oriented.asp  
+ http://www.cnblogs.com/TomXu/archive/2012/02/06/2330609.html

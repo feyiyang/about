@@ -18,14 +18,21 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 	<body>
 		<Header />
 		<main id="main">
-			<section>
+			<section class="wrap">
 				<ul class="arts">
 					{posts.map((post) => {
 						const withDesc = !!post.frontmatter.description
 						return (
 							<li class={withDesc ? "desc_box" : ""}>
 								<p class="title">
-									{post.frontmatter.titlePre}<a href={post.url}>{post.frontmatter.title}</a>
+									<a class="link" href={post.url}>{post.frontmatter.title}</a>
+									<span class="extra">
+										{
+											post.frontmatter.blogs?.map(blog => (
+												<a href={blog.link} target="_blank">{blog.from}</a>
+											))
+										}
+									</span>
 									<time datetime={post.frontmatter.pubDate}>
 										{new Date(post.frontmatter.pubDate).toLocaleDateString('zh-cn', {
 											year: 'numeric',
@@ -36,7 +43,7 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 								</p>
 								{
 									withDesc && 
-									<p class="desc">{post.frontmatter.description}</p>
+									<div class="desc">{post.frontmatter.description}</div>
 								}
 							</li>
 						)
@@ -49,8 +56,12 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 </html>
 <style lang="less">
 @import '../styles/global.less';
+.wrap {
+	padding: 0 20px;
+}
 .arts li {
 	padding: 2px 0 20px 0;
+	list-style: none;
 	// &.desc_box {
 	// 	.title {
 			
@@ -66,12 +77,12 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 			font-size: 12px;
 			color: @text_grey;
 		}
-		a {
+		a.link {
 			font-size: 16px;
 			display: inline-block;
 			border-bottom: 1px @bg_dark solid;
-			&:visited{
-				color: inherit;
+			&:hover {
+				border-color: @text_blue;
 			}
 		}
 	}
@@ -82,6 +93,11 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 		border-radius: 0 0 4px 4px;
 		// background: url(../assets/default_cov.jpg) no-repeat;
 		// background-size: cover;
+	}
+	.extra {
+		padding-left: 8px;
+		font-size: 10px;
+		color: #999;
 	}
 }
 </style>

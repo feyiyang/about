@@ -1,0 +1,98 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: 理解函数中的this
+blogs: [
+  { from: "cnblogs", link: "https://www.cnblogs.com/feYiyang/p/10408566.html" }
+]
+description: "this是执行上下文中的一个属性。它的设计目的是在函数体内部指代函数当前的运行环境，以方便的引用当前环境的其它变量对象。在实例化对象时，开发者会使用什么样的变量名是不确定的。使用 this，即可在任何多个地方重用同一个函数。"
+pubDate: "2019/02/21"
+heroImage: ""
+tag:
+  - 前端
+  - javascript
+---
+import SideNav from '../../components/SideNav.vue';
+
+<SideNav>
+
+{/*
+<!-- vscode-markdown-toc -->
+*/}
+	* [由来](#)
+	* [使用](#-1)
+	* [修改this指向(apply和call方法)](#thisapplycall)
+
+{/*
+<!-- vscode-markdown-toc-config
+	numbering=false
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+*/}
+</SideNav>
+
+### <a name=''></a>由来
+
+　　this是执行上下文中的一个属性。它的设计目的是在函数体内部指代函数当前的运行环境，以方便的引用当前环境的其它变量对象。在实例化对象时，开发者会使用什么样的变量名是不确定的。使用 this，即可在任何多个地方重用同一个函数。  
+
+内存的数据结构  
+
+```js
+var obj = { foo:  'bar' };
+
+var obj2 = { foo: function () {console.log(this.bar)} };
+var foo = obj2.foo;
+var bar = 2;
+
+obj2.foo() // 1
+foo() // 2
+```
+
+上面代码我们首先将对象\{ foo: 'bar' \}赋值给变量obj。JavaScript 会先在内存里面，生成一个对象\{ foo: 'bar' \}，然后把这个对象的内存地址赋值给变量obj。也就是说，变量obj是一个地址。读取obj.foo时先从obj拿到内存地址，然后再从该地址读出原始的对象，返回它的foo属性。  
+
+obj2.foo()是通过obj2找到foo，所以就是在obj2环境执行。一旦`var foo = obj2.foo`，变量foo就直接指向函数本身，所以foo()就变成在全局环境执行。  
+
+### <a name='-1'></a>使用
+
+一、全局环境  
+
+在全局执行环境中（在任何函数体外部）this 都指向全局对象。在浏览器中, window 对象同时也是全局对象。  
+
+二、函数（运行内）环境  
+
+**作为对象的方法**  
+　当函数作为对象里的方法被调用时，它们的 this 是调用该函数的对象。  
+
+```js 
+var foo = {
+  bar: function () {
+    console.log(this);
+  }
+};
+ 
+foo.bar(); // Reference, OK => foo
+(foo.bar)(); // Reference, OK => foo
+ 
+(foo.bar = foo.bar)(); // global?
+(false || foo.bar)(); // global?
+(foo.bar, foo.bar)(); // global?
+```
+
+需要注意的是以上代码先运算再执行，this也不再指向obj了。  
+
+**作为构造函数**  
+当一个函数用作构造函数时（使用new关键字），它的this被绑定到正在构造的新对象。  
+
+### <a name='thisapplycall'></a>修改this指向(apply和call方法)
+
+他们用接受的第一个参数作为this值，this 在调用的作用域中使用，可以理解为扩展了执行上下文环境。apply和call的功能是一样的，只是传入的参数列表形式不同。  
+
+参&摘   
+http://www.ruanyifeng.com/blog/2018/06/javascript-this.html;  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this;  
+
+还可阅读  https://www.cnblogs.com/justinw/archive/2010/05/04/1727295.html
+
+ 
+
+..
