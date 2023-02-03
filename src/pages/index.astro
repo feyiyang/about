@@ -1,6 +1,5 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 ---
@@ -11,15 +10,43 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header title={SITE_TITLE} />
 		<main class="main">
-			
+			<section class="demos">
+				<h2>我的作品DEMO</h2>
+				<div class="demo">
+					<img src="/images/music_demo.png" object-fit="cover" alt="">
+				</div>
+			</section>
+			<section class="blog">
+				<h2>博客节选</h2>
+			</section>
+			<section class="weibo"></section>
+			<section class="who">
+				<h2>关于我</h2>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
 <style lang="less">
+@import '../styles/var.less';
+html, body{
+	height: 100%;
+}
+.wraper {
+	padding: 10px;
+	border-radius: 6px;
+}
+h2 {
+	font-size: 16px;
+}
 .main {
-	padding-top: 70px;
+	width: 880px;
+	display: grid;
+	margin: auto;
+	.demos {
+		.wraper;
+		background-color: @bg_blue;
+	}
 }
 </style>
