@@ -9,8 +9,8 @@ import mdx from '@astrojs/mdx';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 // import vercel from '@astrojs/vercel/serverless';
 
-// import netlify from '@astrojs/netlify/functions';
-import netlify from '@astrojs/netlify/edge-functions';
+import netlify from '@astrojs/netlify/functions';
+// import netlify from '@astrojs/netlify/edge-functions';
 
 import sitemap from '@astrojs/sitemap';
 import vue from "@astrojs/vue";
