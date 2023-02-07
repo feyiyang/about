@@ -71,26 +71,28 @@ pre > code {
 blockquote {
   // padding: 10px 1em 10px 3em;
   margin: 5px 0;
-  border-radius: 2px;
+  border-radius: 6px;
   overflow: hidden;
   color: #5d4560;
   font-style: normal;
   background-color: #fff;
+  border-left: 6px solid #d9dde7;
   .qout {
     display: block;
     height: 12px;
+    padding: 0 10px;
     overflow: hidden;
     font-weight: 700;
-    background-color: #d9dde7;
+    color: #d9dde7;
+    // background-color: #d9dde7;
   }
-  // &::before {
-  //   content: "“";
-  //   .qout;
-  // }
+  &::before {
+    content: "“";
+    .qout;
+  }
   &::after {
     content: "”";
     .qout;
-    padding-right: 10px;
     text-align: right;
   }
   p {
@@ -156,7 +158,18 @@ article {
   code {
     color: #666555;
   }
+  hr {
+    margin: 16px 0;
+    height: 1px;
+    overflow: hidden;
+    border: none;
+    background-color: #939393;
+    // border: 1px solid #939393;
+  }
   hr.none {
     border: none;
+  }
+  table {
+    margin: 5px 15px;
   }
 }

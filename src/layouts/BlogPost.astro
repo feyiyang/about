@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { map } from "astro/zod";
 
 export interface Props {
 	content: {
@@ -48,6 +49,7 @@ const { minutesRead } = Astro.props.frontmatter;
 			<article class={ 'article ' + tag.join(' ') }>
 				<h1 class="title">{title}</h1>
 				<div class="extras">
+					{tag && tag.map(t => {<span class="tag">{t}</span>})}
 					{pubDate && <time>发布日期 {pubDate}</time>}
 					{minutesRead && <span class="readed">&emsp;阅读 {parseInt(minutesRead)}</span>}
 					{updatedDate && <div>更新日期 <time>{updatedDate}</time></div>}
