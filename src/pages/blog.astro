@@ -1,12 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+const draftBlogEntries = (await getCollection('blog', (data) => {
+  return data.data.draft !== true;
+})).sort(
+	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 ---
 
@@ -20,21 +22,21 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 		<main id="main">
 			<section class="wrap">
 				<ul class="arts">
-					{posts.map((post) => {
-						const withDesc = !!post.frontmatter.description
+					{draftBlogEntries.map((post) => {
+						const withDesc = !!post.data.description
 						return (
 							<li class={withDesc ? "desc_box" : ""}>
 								<p class="title">
-									<a class="link" href={post.url}>{post.frontmatter.title}</a>
+									<a class="link" href={'/posts/' + post.slug}>{post.data.title}</a>
 									<span class="extra">
 										{
-											post.frontmatter.blogs?.map(blog => (
+											post.data.blogs?.map(blog => (
 												<a href={blog.link} target="_blank">{blog.from}</a>
 											))
 										}
 									</span>
-									<time datetime={post.frontmatter.pubDate}>
-										{new Date(post.frontmatter.pubDate).toLocaleDateString('zh-cn', {
+									<time datetime={post.data.pubDate}>
+										{new Date(post.data.pubDate).toLocaleDateString('zh-cn', {
 											year: 'numeric',
 											month: 'short',
 											day: 'numeric',
@@ -43,7 +45,7 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 								</p>
 								{
 									withDesc && 
-									<div class="desc">{post.frontmatter.description}</div>
+									<div class="desc">{post.data.description}</div>
 								}
 							</li>
 						)
@@ -62,11 +64,6 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 .arts li {
 	padding: 2px 0 20px 0;
 	list-style: none;
-	// &.desc_box {
-	// 	.title {
-			
-	// 	}
-	// }
 	.title {
 		height: 26px;
 		padding: 0 4px;
@@ -91,8 +88,6 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 		background-color: @bg_card;
 		white-space: pre-line;
 		border-radius: 0 0 4px 4px;
-		// background: url(../assets/default_cov.jpg) no-repeat;
-		// background-size: cover;
 	}
 	.extra {
 		padding-left: 8px;

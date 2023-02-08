@@ -1,9 +1,14 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
-const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+
+// Get all entries from a collection. Requires the name of the collection as an argument.
+const draftBlogEntries = (await getCollection('blog', (data) => {
+  return data.data.draft !== true;
+})).sort(
+	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 ---
 
@@ -14,8 +19,8 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 	</head>
 	<body>
 		<main class="main">
-			<section class="ordinarysec">
-				<h2>动态</h2>
+			<section class="viewsec">
+				<h2></h2>
 			</section>
 			<section class="demosec">
 				<h2 class="dtitle">Demos</h2>
@@ -39,19 +44,19 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 			<section class="blogsec">
 				<h2>Blogs</h2>
 				<ul class="arts">
-					{posts.map((post) => {
+					{draftBlogEntries.map((post) => {
 						return (
 							<li>
-								<time datetime={post.frontmatter.pubDate}>
-									{new Date(post.frontmatter.pubDate).toLocaleDateString('zh-cn', {
+								<time datetime={post.data.pubDate}>
+									{new Date(post.data.pubDate).toLocaleDateString('zh-cn', {
 										year: 'numeric',
 										month: 'short',
 										day: 'numeric',
 									})}
 								</time>
-								<a class="link" href={post.url}>{post.frontmatter.title}</a>
+								<a class="link" href={'/posts/' + post.slug}>{post.data.title}</a>
 								<p class="tags">
-									{post.frontmatter.tag && post.frontmatter.tag.map(t => <span class="tag">[{t}]</span>)}
+									{post.data.tag && post.data.tag.map(t => <span class="tag">[{t}]</span>)}
 								</p>
 							</li>
 						)
@@ -183,7 +188,7 @@ h2 {
 			}
 		}
 	}
-	.ordinarysec {
+	.viewsec {
 		float: right;
 		width: 260px;
 		background-color: @bg_yellow;
