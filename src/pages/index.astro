@@ -44,9 +44,9 @@ const draftBlogEntries = (await getCollection('blog', (data) => {
 			<section class="blogsec">
 				<h2>Blogs</h2>
 				<ul class="arts">
-					{draftBlogEntries.map((post) => {
-						return (
-							<li>
+					{draftBlogEntries.map((post, index) => {
+						return index > 8 ? null : (
+							<li class="bli">
 								<time datetime={post.data.pubDate}>
 									{new Date(post.data.pubDate).toLocaleDateString('zh-cn', {
 										year: 'numeric',
@@ -61,6 +61,9 @@ const draftBlogEntries = (await getCollection('blog', (data) => {
 							</li>
 						)
 					} )}
+					<li>
+						<a href="/blog">More →</a>
+					</li>
 				</ul>
 			</section>
 		</main>
@@ -152,8 +155,8 @@ h2 {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
-			padding-bottom: 40px;
-			li {
+			align-items: center;
+			li.bli {
 				width: 49%;
 				margin-bottom: 10px;
 				border-radius: 2px;

@@ -45,7 +45,7 @@ const draftBlogEntries = (await getCollection('blog', (data) => {
 								</p>
 								{
 									withDesc && 
-									<div class="desc">{post.data.description}</div>
+									<div class="desc">{post.data.titlePre.length ? `[${post.data.titlePre.join(',')}]` : ''} {post.data.description}</div>
 								}
 							</li>
 						)
