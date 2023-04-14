@@ -19,3 +19,27 @@
   max-width: 960px;
   margin: 0 auto;
 }
+
+.img_holder (@placeholder) {
+  @keyframes @placeholder {
+    0% {
+      background-color: var(--placeholder-primary);
+    }
+    50% {
+      background-color: var(--placeholder-secondary);
+    }
+    100% {
+      background-color: var(--placeholder-primary);
+    }
+  }
+}
+.img_fadeIn (@fadeIn) {
+  @keyframes @fadeIn {
+    0% {
+      opacity: 0%;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+}

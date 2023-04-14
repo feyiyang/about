@@ -55,7 +55,7 @@ obj2.foo()是通过obj2找到foo，所以就是在obj2环境执行。一旦`var 
 
 一、全局环境  
 
-在全局执行环境中（在任何函数体外部）this 都指向全局对象。在浏览器中, window 对象同时也是全局对象。  
+在全局执行环境中（在任何函数体外部）this 都指向全局对象。在浏览器中, window 对象同时也是全局对象。_注:'use strict'模式下指向undefined_   
 
 二、函数（运行内）环境  
 
@@ -80,7 +80,17 @@ foo.bar(); // Reference, OK => foo
 需要注意的是以上代码先运算再执行，this也不再指向obj了。  
 
 **作为构造函数**  
-当一个函数用作构造函数时（使用new关键字），它的this被绑定到正在构造的新对象。  
+当一个函数用作构造函数时（使用new关键字），它的this被绑定到正在构造的新对象。参考简例
+```js
+function Fn () {
+	this.bar = 'feyiyang'
+}
+
+// new Foo()
+const obj = {}
+obj.__proto__ = Foo.prototype
+Fn.call(obj)
+```  
 
 ### <a name='thisapplycall'></a>修改this指向(apply和call方法)
 
