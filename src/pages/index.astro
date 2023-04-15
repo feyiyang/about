@@ -7,11 +7,9 @@ import { a } from '.netlify/functions-internal/chunks/astro.1bfa8dac.mjs'
 
 // Get all entries from a collection. Requires the name of the collection as an argument.
 // let tags = Object.create(null)
-const draftBlogEntries = (
-  await getCollection('blog', (data) => {
-    return data.data.draft !== true
-  })
-)
+const draftBlogEntries = await getCollection('blog', (data) => {
+  return data.data.draft !== true
+})
 var tags = Array.from(
   new Set(draftBlogEntries.map((e) => e.data.tag).flat()).values()
 )
@@ -34,11 +32,9 @@ draftBlogEntries.sort(
           <a href="/about">扫灰</a>
         </p>
         <div class="tags">
-					{
-						tags.map(t => <a class="tag">{t}</a>)
-					}
-					<a href=""></a>
-				</div>
+          {tags.map((t) => <a class="tag">{t}</a>)}
+          <a href=""></a>
+        </div>
       </section>
       <section class="demosec">
         <h2 class="dtitle">Demos</h2>
@@ -243,22 +239,71 @@ draftBlogEntries.sort(
               text-decoration: underline;
             }
           }
-					.tags {
-						padding: 10px;
-						margin-top: 10px;
-						background-color: @bg_yellow;
-						.tag {
-							margin: 0 10px 5px 0;
-							color: @text_blank;
-							white-space: nowrap;
-							&::before {
-								content: '#';
-								color: @text_org;
-							}
-						}
-					}
+          .tags {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: @bg_yellow;
+            .tag {
+              margin: 0 10px 5px 0;
+              color: @text_blank;
+              white-space: nowrap;
+              &::before {
+                content: '#';
+                color: @text_org;
+              }
+            }
+          }
         }
       }
     </style>
+    <script
+      type="text/javascript"
+      src="https://i.tq121.com.cn/j/jquery-1.11.0.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"
+    ></script>
+    <script type="text/javascript">
+      var geolocation = new qq.maps.Geolocation(
+        'SK7BZ-OJ73J-GWIFA-XYSN4-UDAZF-QCBJM',
+        'wxxcx'
+      )
+      window.onload = geolocation.getLocation(showPosition, showErr, options)
+      var positionNum = 0
+      var options = { timeout: 8000 }
+      function showPosition(position) {
+        positionNum++
+        var lat = position.lat
+        var lng = position.lng
+
+        $.ajax({
+          url:
+            'https://d4.weather.com.cn/geong/v1/api?params={"method":"stationinfo","lat":' +
+            lat +
+            ',"lng":' +
+            lng +
+            ',"callback":"getDataGeo"}',
+          dataType: 'jsonp',
+          jsonpCallback: 'getDataGeo',
+          success: function (data) {
+            console.log('/mweather/' + data.data.station.areaid + '.shtml')
+            getWeth(data.data.station.areaid)
+          }
+        })
+      }
+
+      function getWeth (lt) {
+        $.ajax({
+          url: 'https://d1.weather.com.cn/sk_2d/' + lt + '.html',
+          success: function (data) {
+            console.log(data)
+          }
+        })
+      }
+      function showErr() {
+        console.log('wether load error')
+      }
+    </script>
   </body>
 </html>
