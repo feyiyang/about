@@ -27,13 +27,17 @@ draftBlogEntries.sort(
   <body>
     <main class="main">
       <section class="viewsec">
+        <div class="weather_wrap">
+          <span class="city"></span>
+          <span class="weather"></span>
+          <span class="temperature_float"></span>
+        </div>
         <p class="intror">
           门面有了点缀、才有更多的人想进门内<br />
           <a href="/about">扫灰</a>
         </p>
         <div class="tags">
           {tags.map((t) => <a class="tag">{t}</a>)}
-          <a href=""></a>
         </div>
       </section>
       <section class="demosec">
@@ -232,7 +236,7 @@ draftBlogEntries.sort(
           float: right;
           width: 280px;
           .intror {
-            padding: 6px 6px 6px 12px;
+            padding: 10px;
             line-height: 1.4;
             background-color: @bg_card;
             a {
@@ -253,6 +257,18 @@ draftBlogEntries.sort(
               }
             }
           }
+          .weather_wrap {
+            display: flex;
+            // margin: 10px 0;
+            padding: 10px;
+            background-color: @bg_yellow_light;
+            .city {
+              flex: 1;
+            }
+            .weather {
+              width: 40px;
+            }
+          }
         }
       }
     </style>
@@ -262,46 +278,38 @@ draftBlogEntries.sort(
     ></script>
     <script
       type="text/javascript"
-      src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"
+      src="https://apis.map.qq.com/tools/geolocation/min?key=SK7BZ-OJ73J-GWIFA-XYSN4-UDAZF-QCBJM&referer=mysite"
     ></script>
     <script type="text/javascript">
       var geolocation = new qq.maps.Geolocation(
         'SK7BZ-OJ73J-GWIFA-XYSN4-UDAZF-QCBJM',
-        'wxxcx'
+        'mysite'
       )
-      window.onload = geolocation.getLocation(showPosition, showErr, options)
+      window.onload = geolocation.getIpLocation(showPosition, showErr)
       var positionNum = 0
-      var options = { timeout: 8000 }
       function showPosition(position) {
+        console.log(position)
         positionNum++
         var lat = position.lat
         var lng = position.lng
 
         $.ajax({
-          url:
-            'https://d4.weather.com.cn/geong/v1/api?params={"method":"stationinfo","lat":' +
-            lat +
-            ',"lng":' +
-            lng +
-            ',"callback":"getDataGeo"}',
-          dataType: 'jsonp',
-          jsonpCallback: 'getDataGeo',
+          url: '//restapi.amap.com/v3/weather/weatherInfo?key=d0886111e288e35b19f73aabe4e76c8c&city=' + position.adcode,
           success: function (data) {
-            console.log('/mweather/' + data.data.station.areaid + '.shtml')
-            getWeth(data.data.station.areaid)
+            if (!data) return
+            let { lives: [weatherInfo], infocode } = data
+            if (infocode = '10000') {
+              $('.weather_wrap .weather').text(weatherInfo.weather)
+              $('.weather_wrap .temperature_float').text(weatherInfo.temperature_float + '℃')
+              $('.weather_wrap .city').text(weatherInfo.city)
+            } else {
+              $('.weather_wrap').hide()
+            }
           }
-        })
+        });
       }
-
-      function getWeth (lt) {
-        $.ajax({
-          url: 'https://d1.weather.com.cn/sk_2d/' + lt + '.html',
-          success: function (data) {
-            console.log(data)
-          }
-        })
-      }
-      function showErr() {
+      function showErr(err) {
+        console.log(err)
         console.log('wether load error')
       }
     </script>
