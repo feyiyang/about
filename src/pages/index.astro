@@ -287,14 +287,12 @@ draftBlogEntries.sort(
       )
       window.onload = geolocation.getIpLocation(showPosition, showErr)
       var positionNum = 0
+      $('.weather_wrap').hide()
       function showPosition(position) {
-        console.log(position)
         positionNum++
-        var lat = position.lat
-        var lng = position.lng
 
         $.ajax({
-          url: '//restapi.amap.com/v3/weather/weatherInfo?key=d0886111e288e35b19f73aabe4e76c8c&city=' + position.adcode,
+          url: 'mweather.json?city=' + position.adcode,
           success: function (data) {
             if (!data) return
             let { lives: [weatherInfo], infocode } = data
@@ -302,11 +300,10 @@ draftBlogEntries.sort(
               $('.weather_wrap .weather').text(weatherInfo.weather)
               $('.weather_wrap .temperature_float').text(weatherInfo.temperature_float + '℃')
               $('.weather_wrap .city').text(weatherInfo.city)
-            } else {
-              $('.weather_wrap').hide()
+              $('.weather_wrap').show()
             }
           }
-        });
+        })
       }
       function showErr(err) {
         console.log(err)
