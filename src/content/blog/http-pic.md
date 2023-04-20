@@ -2,7 +2,7 @@
 layout: "../../layouts/BlogPost.astro"
 title: "图解http"
 titlePre: [笔记]
-description: "笔记里面没有图"
+description: "笔记里面没有图。 TCP/IP协议族里最重要的一点是分层：应用层、传输层、网络层和数据链路层。应用层决定了向用户提供应用服务时通信的活动；传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据串数；链路层(又名数据链路层、网络接口层)用来处理网络连接的硬件部分。"
 pubDate: "2021/07/08"
 heroImage: ""
 tag: 

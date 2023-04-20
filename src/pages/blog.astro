@@ -45,7 +45,12 @@ const draftBlogEntries = (await getCollection('blog', (data) => {
 								</p>
 								{
 									withDesc && 
-									<div class="desc">{post.data.titlePre.length ? `[${post.data.titlePre.join(',')}]` : ''} {post.data.description}</div>
+									<div class="desc">{
+											post.data.description
+										} {
+											post.data.tag && post.data.tag.map(t => <span class="ptag">{t}</span>)
+										}
+									</div>
 								}
 							</li>
 						)
@@ -84,10 +89,34 @@ const draftBlogEntries = (await getCollection('blog', (data) => {
 		}
 	}
 	.desc {
+		position: relative;
 		padding: 4px 8px;
+		border-radius: 0 0 4px 4px;
 		background-color: @bg_card;
 		white-space: pre-line;
-		border-radius: 0 0 4px 4px;
+		.gen-columns(1);
+		.gen-columns(@n) when (@n =< 7) {
+			.ptag:nth-of-type(@{n}) {
+				z-index: 10 - @n;
+				bottom: 10px * (@n - 1);
+			}
+			.gen-columns(@n + 1);
+		};
+		.ptag {
+			position: absolute;
+			left: -5px;
+			bottom: 0;
+			padding: 0 5px;
+			transform: translateX(-100%);
+			font-size: 12px;
+			background-color: #fff;
+			border-left: 2px @bg_grey solid;
+			border-bottom: 2px @bg_grey solid;
+			cursor: default;
+			&:hover {
+				z-index: 9;
+			}
+		}
 	}
 	.extra {
 		padding-left: 8px;

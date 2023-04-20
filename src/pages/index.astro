@@ -17,6 +17,10 @@ draftBlogEntries.sort(
   (a, b) =>
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 )
+
+const remarkEntries = await getCollection('remark', (data) => {
+  return data
+})
 ---
 
 <!DOCTYPE html>
@@ -38,6 +42,20 @@ draftBlogEntries.sort(
         </p>
         <div class="tags">
           {tags.map((t) => <a class="tag">{t}</a>)}
+        </div>
+        <div class="remarks">
+          {
+            remarkEntries.map((re, index) => {
+              return (
+                <div class="rem_card">
+                  {re.body}
+                  <p class="sign">
+                    {re.data.sig}  
+                  </p>
+                </div>
+              )
+            })
+          }
         </div>
       </section>
       <section class="demosec">
@@ -234,7 +252,10 @@ draftBlogEntries.sort(
         }
         .viewsec {
           float: right;
-          width: 280px;
+          width: 260px;
+          padding: 10px;
+          border-radius: 6px;
+          background-color: @bg_yellow;
           .intror {
             padding: 10px;
             line-height: 1.4;
@@ -244,7 +265,7 @@ draftBlogEntries.sort(
             }
           }
           .tags {
-            padding: 10px;
+            padding: 5px 10px;
             margin-top: 10px;
             background-color: @bg_yellow;
             .tag {
@@ -259,14 +280,30 @@ draftBlogEntries.sort(
           }
           .weather_wrap {
             display: flex;
-            // margin: 10px 0;
-            padding: 10px;
+            height: 42px;
+            padding: 0 10px;
+            transition: all .6s;
+            line-height: 42px;
             background-color: @bg_yellow_light;
             .city {
               flex: 1;
             }
             .weather {
               width: 40px;
+            }
+          }
+          .remarks {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: @bg_yellow_light;
+            word-break: break-all;
+            .sign{
+              margin-top: 5px;
+              padding: 5px 0;
+              border-radius: 2px;
+              font-size: 12px;
+              line-height: 1;
+              color: @text_org;
             }
           }
         }
