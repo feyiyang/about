@@ -268,14 +268,14 @@ reviews.insert(String::from("Programming in Rust"), String::from("Great examples
 ```
 `use` 类似于其他编程语言所述的导入。  
 #### 获取键值
-```Rust
+```rust
 let book: &str = "Programming in Rust";
 println!("\nReview for \'{}\': {:?}", book, reviews.get(book));
 // Review for 'Programming in Rust': Some("Great examples.")
 // 由于 get 方法返回 Option<&Value> 类型，因此 Rust 使用"Some()"表示法包装方法调用的结果。
 ```
 #### 删除键值对
-```Rust
+```rust
 let obsolete: &str = "Ancient Roman History";
 reviews.remove(obsolete);
 
@@ -289,7 +289,7 @@ Rust 提供三种循环：
 - `for`: 对集合中的所有值重复代码
 
 `loop` 可添加特定代码停止，也可输入Ctrl+C等键盘指令停止。  
-```Rust
+```rust
 let mut counter = 1;
 
 let stop_loop = loop {
@@ -303,7 +303,7 @@ println!("counter = {}.", stop_loop)
 ```
 断点返回相同类型的值。值类型都必须为整数、字符串或布尔等。未显示返回程序将表达式结果解释为空元组`()`。  
 #### 循环while语句
-```Rust
+```rust
 while counter < 5 {
   println!("We loop a while...");
   counter = counter + 1;
@@ -360,7 +360,7 @@ for &index in [0, 2, 99].iter() {
 - `match` arm必须涵盖输入类型可能具有的每个可能值。如果你尝试根据非详尽模式列表进行匹配，则会出现编译器错误。
 
 #### if let 表达式
-```Rust
+```rust
 let a_number = Option<u8> = Some(7);
 if let Some(7) = a_number {
   println!("That's my lucky number!");
@@ -375,7 +375,7 @@ if let Some(7) = a_number {
 - 调用类似的非panic方法，例如`unwrap_or`。
 
 #### 使用 Result 类型处理错误
-```Rust
+```rust
 #[derive(Debug)]
 struct DivisionByZeroError;
 
