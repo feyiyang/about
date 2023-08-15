@@ -24,8 +24,8 @@ export default defineConfig({
   integrations: [mdx({
     rehypePlugins: [rehypeKatex]
   }), sitemap(), vue()],
-  output: 'static',
-  adapter: netlify(),
+  // output: 'static',
+  // adapter: netlify(),
   markdown: {
     remarkPlugins: [remarkMath, supersub, remarkTextr, remarkToc, remarkReadingTime],
     rehypePlugins: [rehypeMathJaxSvg]
