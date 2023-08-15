@@ -3,8 +3,16 @@ import { getEntryBySlug } from 'astro:content';
 // 1. Get the slug from the incoming server request
 const { slug } = Astro.params;
 // 2. Query for the entry directly using the request slug
-const entry = await getEntryBySlug('blog', slug);
+const entry = await getEntryBySlug('tag', slug);
 // 3. (Optional) render the entry to HTML in the template
 const { Content } = await entry.render();
+export function getStaticPaths() {
+  return [
+    {params: {tag: 'JavaScript'}},
+    {params: {tag: '随笔'}},
+    {params: {tag: '前端'}},
+    {params: {tag: '设计模式'}}
+  ];
+}
 ---
 <Content />
