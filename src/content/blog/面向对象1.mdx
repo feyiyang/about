@@ -178,3 +178,221 @@ console.log(num.valueOf()); //6
  https://www.ibm.com/developerworks/cn/web/1304_zengyz_jsoo/   
  http://www.w3school.com.cn/js/pro_js_object_oriented.asp  
  http://www.cnblogs.com/TomXu/archive/2012/02/06/2330609.html
+
+
+  
+# 跟AI学习 - JavaScript面向对象
+
+## 基本概念
+- 面向对象是一种编程范式，主要思想是将数据和操作数据的方法打包在一起。
+- 对象是一种复合值，可将其看作一个属性的集合。
+- 对象的属性可以包含基本类型、函数或其他对象。
+
+## 创建对象
+### 工厂模式
+- 通过工厂函数来创建对象，函数内部封装了具体的实现细节。
+- 缺点：无法识别对象类型，即无法通过 instanceof 判断对象类型。
+```javascript
+function createPerson(name, age) {
+  var obj = new Object();
+  obj.name = name;
+  obj.age = age;
+  obj.sayHi = function() {
+    console.log(`Hi, my name is ${this.name}, I'm ${this.age} years old.`);
+  };
+  return obj;
+}
+
+var person1 = createPerson('Alice', 20);
+var person2 = createPerson('Bob', 25);
+
+person1.sayHi(); // Hi, my name is Alice, I'm 20 years old.
+person2.sayHi(); // Hi, my name is Bob, I'm 25 years old.
+```
+
+### 构造函数模式
+- 使用构造函数来创建对象，通过 new 关键字创建对象时，会自动执行构造函数内部的代码。
+- 构造函数的命名约定：首字母大写，用于区分普通函数。
+- 缺点：每个实例都有一份相同的方法，浪费内存。
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayHi = function() {
+    console.log(`Hi, my name is ${this.name}, I'm ${this.age} years old.`);
+  };
+}
+
+var person1 = new Person('Alice', 20);
+var person2 = new Person('Bob', 25);
+
+person1.sayHi(); // Hi, my name is Alice, I'm 20 years old.
+person2.sayHi(); // Hi, my name is Bob, I'm 25 years old.
+```
+
+### 原型模式
+- 将对象的共同方法和属性放在原型对象中，每个实例共享原型对象上的属性和方法。
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.sayHi = function() {
+  console.log(`Hi, my name is ${this.name}, I'm ${this.age} years old.`);
+};
+
+var person1 = new Person('Alice', 20);
+var person2 = new Person('Bob', 25);
+
+person1.sayHi(); // Hi, my name is Alice, I'm 20 years old.
+person2.sayHi(); // Hi, my name is Bob, I'm 25 years old.
+```
+
+### 组合模式
+- 使用构造函数模式和原型模式的组合方式来创建对象。
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.sayHi = function() {
+  console.log(`Hi, my name is ${this.name}, I'm ${this.age} years old.`);
+};
+
+var person1 = new Person('Alice', 20);
+var person2 = new Person('Bob', 25);
+
+person1.sayHi(); // Hi, my name is Alice, I'm 20 years old.
+person2.sayHi(); // Hi, my name is Bob, I'm 25 years old.
+```
+
+## 继承
+### 原型链继承
+- 将子类的原型对象指向父类实例，从而实现继承。
+- 缺点：所有子类实例共享同一个父类实例上的属性和方法，无法实现多继承。
+```javascript
+function Animal() {
+  this.species = 'animal';
+}
+
+function Dog(name) {
+  this.name = name;
+}
+
+Dog.prototype = new Animal();
+
+var dog1 = new Dog('小黄');
+console.log(dog1.species); // animal
+```
+
+### 构造函数继承
+- 在子类构造函数中调用父类构造函数，将父类的属性添加到子类实例上。
+- 缺点：无法继承父类原型对象上的属性和方法。
+```javascript
+function Animal(species) {
+  this.species = species;
+}
+
+function Dog(name, species) {
+  Animal.call(this, species);
+  this.name = name;
+}
+
+var dog1 = new Dog('小黄', 'dog');
+console.log(dog1.species); // dog
+```
+
+### 组合继承
+- 结合原型链继承和构造函数继承的优点。
+- 子类实例既能够访问父类原型对象上的方法，又能够拥有自己的属性。
+```javascript
+function Animal(species) {
+  this.species = species;
+}
+
+Animal.prototype.saySpecies = function() {
+  console.log(`I'm a ${this.species}.`);
+};
+
+function Dog(name, species) {
+  Animal.call(this, species);
+  this.name = name;
+}
+
+Dog.prototype = new Animal();
+Dog.prototype.constructor = Dog;
+
+var dog1 = new Dog('小黄', 'dog');
+console.log(dog1.species); // dog
+dog1.saySpecies(); // I'm a dog.
+```
+
+### 原型式继承
+- 借助已有的对象创建新的对象，实现对原有对象的一种增强或修正。
+```javascript
+var parent = {
+  name: 'parent',
+  sayHi: function() {
+    console.log(`Hi, my name is ${this.name}.`);
+  }
+};
+
+var child = Object.create(parent);
+child.name = 'child';
+
+child.sayHi(); // Hi, my name is child.
+```
+
+### 寄生式继承
+- 在原型式继承的基础上，增加了对返回对象的封装。
+- 缺点：无法做到函数复用，每个实例都会单独创建方法。
+```javascript
+function createChild(parent) {
+  var child = Object.create(parent);
+  child.sayHi = function() {
+    console.log(`Hi, my name is ${this.name}.`);
+  };
+  return child;
+}
+
+var parent = {
+  name: 'parent'
+};
+
+var child = createChild(parent);
+child.name = 'child';
+
+child.sayHi(); // Hi, my name is child.
+```
+
+### 寄生组合式继承
+- 在组合继承的基础上，使用寄生式继承优化父类原型对象的创建。
+```javascript
+function Animal(species) {
+  this.species = species;
+}
+
+Animal.prototype.saySpecies = function() {
+  console.log(`I'm a ${this.species}.`);
+};
+
+function Dog(name, species) {
+  Animal.call(this, species);
+  this.name = name;
+}
+
+Dog.prototype = Object.create(Animal.prototype, {
+  constructor: {
+    value: Dog,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  }
+});
+
+var dog1 = new Dog('小黄', 'dog');
+console.log(dog1.species); // dog
+dog1.saySpecies(); // I'm a dog.
+```
