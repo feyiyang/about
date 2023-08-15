@@ -13,7 +13,7 @@ tag:
 ### 基本程序结构
 #### Rust函数
 每个rust程序必须有名为`main`的函数
-```rust
+```
 fn main() {
   printIn!("Hello, world");
 }
@@ -24,7 +24,7 @@ fn main() {
 
 #### todo!宏(macro)
 Rust中的宏类似于采用可变数量的输入参数的函数。  
-```rust
+```
 fn main() {
   todo!("Display the message by using the println!() macro");
 }
@@ -32,7 +32,7 @@ fn main() {
 
 #### println!宏
 `println!`宏需要一个或多个输入参数，这些参数会显示在屏幕或标准输出中。
-```rust
+```
 fn main() {
   // println! displays the input 'Hello, world' to the screen
   println!("Hello, world!");
@@ -40,7 +40,7 @@ fn main() {
 ```
 
 #### {}参数的值替换
-```rust
+```
 fn main() {
   println!("The first letter of the English alphabet is {} and the last letter is {}.", 'A', 'Z');
 }
@@ -49,14 +49,14 @@ fn main() {
 ### Rust中创建和使用变量 
 #### 变量
 声明变量后，可将其绑定到某个值，也可稍后在程序中绑定该值。
-```rust
+```
 let a_number = 10;
 ```
 如果尝试在绑定`a_number`之前显示该变量值，则编译器会返回错误。  
 
 #### 不可变与可变
 变量绑定默认不可变。 更改值必须先使用`mut`关键字将变量绑定为可变。  
-```rust
+```
 let mut a_number = 10;
 println!("The number is {}.", a_number);
 
@@ -69,7 +69,7 @@ println!("Now the number is {}.", a_number);
 
 #### 探索数字、文本和 true/false 值的数据类型
 Rust是一种静态类型化的语言。编译器通常可以根据绑定值推断变量数据类型。多种类型必须通过使用类型注释让编译器得知特定类型。  
-```rust
+```
 let number: u32 = "14"
 // 编译器会发生错误
 ```
@@ -92,14 +92,14 @@ let number: u32 = "14"
 
 #### 文本：字符或字符串
 字符 `char`类型是最基元的文本类型。
-```rust
+```
 let uppercase_s = 'S';
 let lowercase_f = 'f';
 let smiley_face = '😀';
 ```
 字符串 `str` 类型也称为"字符串切片",它是字符串数据的一种视图。字符串字面量的类型都是`&str`。  
 对于字符串未知 如用户输入等场景，Rust具有另一个名为`String`的字符串类型。此类型在堆上分配。  
-```rust 
+``` 
 // 使用: char 注释语法声明字符变量
 let character_1: char = 'S';
 let character_2: char = 'f';
@@ -115,7 +115,7 @@ let string_2: &str = "ace";
 
 ### 元组和结构定义数据集合
 #### 元组
-```rust
+```
 let tuple_e = ('E', 5i32, true);
 
 println!("Is '{}' the {}th letter of the alphabet? {}", tuple_e.0, tuple_e.1, tuple_e.2);
@@ -123,7 +123,7 @@ println!("Is '{}' the {}th letter of the alphabet? {}", tuple_e.0, tuple_e.1, tu
 
 #### 结构
 Rust支持三种结构类型: 经典结构、元组结构和单元结构。
-```rust
+```
 // 经典 C结构 最常用
 struct Student { name: String, level: u8, remote: bool }
 
@@ -134,7 +134,7 @@ struct Grades(char, char, char, char, f32);
 struct Unit;
 ```
 实例化结构
-```rust
+```
 let user_1 = Student { name: String::from("Constance Sharma"), remote: true, level: 2 };
 let user_2 = Student { name: String::from("Dyson Tan"), level: 5, remote: false };
 
@@ -148,7 +148,7 @@ println!("{}, level {}. Remote: {}. Grades: {}, {}, {}, {}. Average: {}", user_1
 
 ### 为复合数据使用枚举变量
 Rust中提及的枚举通常称为代数数据类型。  
-```rust
+```
 enum WebEvent {
   // 没有关联的数据类型或数据
   WELoad,
@@ -159,7 +159,7 @@ enum WebEvent {
 }
 ```
 #### 实例化枚举
-```rust
+```
 struct KeyPress(String, char);
 struct MouseClick { x: i64, y: i64 };
 
@@ -182,7 +182,7 @@ let we_key = WebEvent::WEKeys(keys);
 
 ### Rust中使用函数
 Rust中函数定义以`fn`关键字开头。
-```rust
+```
 fn main() {
   println!("Hello, world");
 
@@ -198,7 +198,7 @@ fn goodbye(message: &str) {
 ```
 #### 返回值
 `-> <type>`。
-```rust
+```
 fn divide_by_5(num: u32) -> u32 {
   if num == 0 {
     // 显式使用 return 关键字提前从函数返回
@@ -213,7 +213,7 @@ fn divide_by_5(num: u32) -> u32 {
 
 ### 使用 Rust 中的 if/else 表达式测试条件
 #### 创建和使用数组
-```rust
+```
 // 未指定长度的逗号分隔的值列表
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -229,7 +229,7 @@ let bytes = [0; 5];
 #### 浏览矢量数据类型
 矢量存储数据类型相同的多个值，向量的大小或长度可以随时增大或减小。   
 声明和初始化向量的常用方法是使用`vec!`宏。  
-```rust
+```
 let three_nums = vec![15, 3, 46];
 println!("Initial vector: {:?}", three_nums);
 
@@ -247,7 +247,7 @@ println!("Pop off: {:?}", fruit.pop());
 ```
 ### 使用 if/esle 条件
 Rust中的`if`块也可充当表达式。
-```rust
+```
 let formal = true;
 let greeting = if formal {
   "Good day to you."
@@ -259,7 +259,7 @@ println!("{}", greeting)
 
 ### 使用哈希映射
 `HashMap<K, V>`类型通过映射每个键`K`及其值`V`来存储数据。  
-```rust
+```
 use std::collections::HashMap;
 let mut reviews: HashMap<String, String> = HashMap::new();
 
@@ -268,14 +268,14 @@ reviews.insert(String::from("Programming in Rust"), String::from("Great examples
 ```
 `use` 类似于其他编程语言所述的导入。  
 #### 获取键值
-```rust
+```
 let book: &str = "Programming in Rust";
 println!("\nReview for \'{}\': {:?}", book, reviews.get(book));
 // Review for 'Programming in Rust': Some("Great examples.")
 // 由于 get 方法返回 Option<&Value> 类型，因此 Rust 使用"Some()"表示法包装方法调用的结果。
 ```
 #### 删除键值对
-```rust
+```
 let obsolete: &str = "Ancient Roman History";
 reviews.remove(obsolete);
 
@@ -289,7 +289,7 @@ Rust 提供三种循环：
 - `for`: 对集合中的所有值重复代码
 
 `loop` 可添加特定代码停止，也可输入Ctrl+C等键盘指令停止。  
-```rust
+```
 let mut counter = 1;
 
 let stop_loop = loop {
@@ -303,14 +303,14 @@ println!("counter = {}.", stop_loop)
 ```
 断点返回相同类型的值。值类型都必须为整数、字符串或布尔等。未显示返回程序将表达式结果解释为空元组`()`。  
 #### 循环while语句
-```rust
+```
 while counter < 5 {
   println!("We loop a while...");
   counter = counter + 1;
 }
 ```
 `for` 循环使用临时变量作为迭代器。该变量在循环表达式的开始位置隐式声明，并且每次迭代都会设置当前值。  
-```rust
+```
 let big_birds = ["ostrich", "peacock", "stork"];
 for bird in big_birds.iter() {
   println!("{}", bird);
@@ -325,13 +325,13 @@ for number in 0..5 {
 ### 在Rust中处理错误
 #### 伴随着 panic 的严重错误！
 `panic!`宏将输出一条错误消息、清理资源、然后退出程序。  
-```rust
+```
 let v = vec![0, 1, 2, 3];
 println!("{}", v[6]);// this will cause a panic!
 ```
 #### 使用Option类型处理缺失
 `Option<T>`在Rust代码中的使用非常广泛。它可用于处理可能存在或可能为空的值。如果要在Rust中对可选字符串建模，则需要将其显示包装在`Option`类型中:`Option<String>`。
-```rust
+```
 enum Option<T> {
   None,   // The value doesn't exist
   Some(T) // The value exists
@@ -345,7 +345,7 @@ println!("{:?}", non_existent);
 ```
 #### 模式匹配
 可利用`match`运算符，通过提供模式来控制程序流。  
-```rust
+```
 let fruits = vec!["banana", "apple", "cocount", "orange", "strawberry"];
 for &index in [0, 2, 99].iter() {
   match fruits.get(index) {
@@ -360,7 +360,7 @@ for &index in [0, 2, 99].iter() {
 - `match` arm必须涵盖输入类型可能具有的每个可能值。如果你尝试根据非详尽模式列表进行匹配，则会出现编译器错误。
 
 #### if let 表达式
-```rust
+```
 let a_number = Option<u8> = Some(7);
 if let Some(7) = a_number {
   println!("That's my lucky number!");
@@ -375,7 +375,7 @@ if let Some(7) = a_number {
 - 调用类似的非panic方法，例如`unwrap_or`。
 
 #### 使用 Result 类型处理错误
-```rust
+```
 #[derive(Debug)]
 struct DivisionByZeroError;
 
@@ -403,7 +403,7 @@ Rust中，作用域常常由大括号`{}`表示、常见作用域包括函数体
 Rust给范围的概念增加了一个转折。当对象超出范围时，便会将其”删除“。删除变量会释放与其关联的所有资源。  
 **移动语义**  
 有时，我们希望将某个项的所有权从一个绑定转移到另一个绑定。Rust中，”转义所有权“被称为”移动“。
-```rust
+```
 let mascot = String::from("ferris");
 let ferris = mascot;
 ```
@@ -413,7 +413,7 @@ let ferris = mascot;
 **复制而不是转移**  
 复制数字的成本低，因此复制这些值是有意义的。复制字符串、向量或其他复杂类型的成本可能高昂，因此它们没有实现`Copy`特征，而是被移动。  
 显式复制
-```rust
+```
 fn process(s: String) {}
 
 fn main() {
@@ -426,7 +426,7 @@ fn main() {
 #### 了解借用
 通过引用，可以”借用“一些值，而无需拥有它们。&  
 **改变借用的值**  
-```rust
+```
 fn main() {
   let mut greeting = String::from("hello");
   change(&mut greeting);
@@ -445,7 +445,7 @@ fn change(text: &mut String) {
 声明周期使Rust能够在不产生垃圾收集性能开销的情况下确保内存安全。  
 **在函数中注释生存期**  
 多个生存期时，生存期批注帮助编译器了解它需要使用哪个生存期，以确保引用在运行时有效。  
-```rust
+```
 fn longest_word<'a>(x: &'a String, y: &'a String) -> &'a String {
   if x.len() > y.len() {
     x
@@ -455,7 +455,7 @@ fn longest_word<'a>(x: &'a String, y: &'a String) -> &'a String {
 }
 ```
 **在类型中批注生存期**  
-```rust
+```
 #[derive(Debug)]
 struct Highlight<'document>(&'document str);
 ```
@@ -463,7 +463,7 @@ struct Highlight<'document>(&'document str);
 是根据其他部分未知类型定义的类型。使用泛型类型时，可以指定所需操作，而不必考虑定义类型持有的内部类型。  
 #### 使用特征定义共享行为
 特征是一组类型可实现的通用接口。  
-```rust
+```
 trait Area {
   fn area(&self) -> f64;
 }
@@ -493,7 +493,7 @@ impl Area for Rectangle {
 - `Display`特征，允许使用`{}`格式说明符来设置类型的格式，与`Debug`类似。但`Display`更适合面向用户的输出。  
 - `PartialEq`特征，允许比较实现器是否相等。 
 Rust编译器可以使用`#[derive(Trait)]`属性自动为我们实现`Debug`和`PartialEq`特征
-```rust
+```
 #[derive(Debug, PartialEq)]
 struct Point {
   x: i32,
@@ -530,7 +530,7 @@ Rust中所有迭代器都会实现名为`Iterator`的特征，该特征在标准
 1. 创建一个结构来保留迭代器的状态。
 2. 实现该结构的迭代器。
 
-```rust
+```
 #[derive(Debug)]
 struct Counter {
   length: usize,
