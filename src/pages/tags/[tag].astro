@@ -40,7 +40,7 @@ const { posts } = Astro.props;
         posts.map((post) => (
           <li class="desc_box">
             <p class="title">
-              <a class="link" href={'/posts/'+post.file.replace(/.*\/(.*)\.md$/g, '$1')}>{post.frontmatter.title}</a>
+              <a class="link" href={'/posts/'+post.file.replace(/.*\/(.*)\.(md|mdx)$/g, '$1')}>{post.frontmatter.title}</a>
             </p>
             <div class="desc">{post.frontmatter.description}</div>
           </li>
