@@ -120,7 +120,7 @@ const remarkEntries = await getCollection('remark', (data) => {
             })
           }
           <li>
-            <a href="/blog">More →</a>
+            <a class="more" href="/blog">More →</a>
           </li>
         </ul>
       </section>
@@ -247,6 +247,9 @@ const remarkEntries = await getCollection('remark', (data) => {
                 margin-right: 4px;
               }
             }
+          }
+          a.more {
+            font-weight: bold;
           }
         }
         .viewsec {
