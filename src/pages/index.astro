@@ -36,11 +36,11 @@ const remarkEntries = await getCollection('remark', (data) => {
           <span class="temperature_float"></span>
         </div>
         <p class="intror">
-          门面有棵杨树下的秋千<br />
+          乡间小路两排杨树.扉中秋千孩提喜欢.<br />
           <a href="/about">扫灰</a>
         </p>
         <div class="tags">
-          {tags.map((t) => <a class="tag">{t}</a>)}
+          {tags.map((t) => <a class="tag" href={'/tags/' + t}>{t}</a>)}
         </div>
         <div class="remarks">
           {

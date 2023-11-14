@@ -25,6 +25,7 @@ export default defineConfig({
   }), sitemap(), vue()],
   // output: 'static',
   // adapter: netlify(),
+  // scopedStyleStrategy: 'where',
   markdown: {
     remarkPlugins: [remarkMath, supersub, remarkTextr, remarkToc, remarkReadingTime],
     rehypePlugins: [rehypeMathJaxSvg]

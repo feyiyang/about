@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/BlogPost.astro"
 title: "大话数据解构"
 titlePre: [笔记]
 description: "数据结构是相互之间存在一种或多种特定关系的数据元素的集合 "

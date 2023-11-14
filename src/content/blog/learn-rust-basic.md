@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/BlogPost.astro"
 title: "学习rust基础"
 description: "了解编程语言中的常见概念，并了解它们是如何在 Rust 中实现的。 这些概念不是 Rust 独有的，但它们为每个 Rust 程序提供了基础。"
 pubDate: "2023/05/05"

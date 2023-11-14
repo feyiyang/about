@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/BlogPost.astro"
 title: "js设计模式"
 description: "设计模式定义：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案。 面向对象的JavaScript"
 pubDate: "2022/02/11"
