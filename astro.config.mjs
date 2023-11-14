@@ -20,7 +20,6 @@ import vue from "@astrojs/vue";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://feyiyang.github.io',
-  baseUrl: '/about',
   integrations: [mdx({
     rehypePlugins: [rehypeKatex]
   }), sitemap(), vue()],
