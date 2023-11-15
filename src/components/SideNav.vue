@@ -35,10 +35,15 @@
   :deep(ul, ol) {
     flex: 1;
     padding: 0;
+  }
+  :deep(>ul, >ol) {
     max-height: calc(100vh - 100px);
     overflow: hidden auto;
     ul {
       padding: 5px 0 0 1em;
+      ul {
+        font-size: 12px;
+      }
     }
   }
   :deep(li) {

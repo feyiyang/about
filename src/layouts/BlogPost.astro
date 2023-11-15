@@ -67,5 +67,8 @@ const {title, description, pubDate, updatedDate, heroImage, tag = [], minutesRea
 	var eleMain = document.getElementById('main') as HTMLElement
 	var eleArticle = eleMain.querySelector('.article') as HTMLElement
 	var eleAside = eleArticle.querySelector('.aside') as HTMLElement
-	eleAside.style.height = eleArticle.clientHeight - 100 + 'px'
+	if (eleAside) {
+		eleAside.style.height = eleArticle.clientHeight - 100 + 'px'
+	}
+
 </script>
