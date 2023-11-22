@@ -1,5 +1,5 @@
 ---
-title: "学习rust基础"
+title: "学习 rust 基础"
 description: "了解编程语言中的常见概念，并了解它们是如何在 Rust 中实现的。 这些概念不是 Rust 独有的，但它们为每个 Rust 程序提供了基础。"
 pubDate: "2023/05/05"
 heroImage: ""
@@ -15,27 +15,27 @@ import SideNave from '../../components/SideNav.vue';
 <!-- vscode-markdown-toc -->
 */}
 - [基本程序结构](#基本程序结构)
-  - [Rust函数](#rust函数)
+  - [Rust 函数](#rust-函数)
   - [代码缩进](#代码缩进)
-  - [todo!宏(macro)](#todo宏macro)
-  - [println!宏](#println宏)
+  - [todo! 宏 (macro)](#todo-宏-macro)
+  - [println! 宏](#println-宏)
   - [{}参数的值替换](#参数的值替换)
-- [Rust中创建和使用变量](#rust中创建和使用变量)
+- [Rust 中创建和使用变量](#rust-中创建和使用变量)
   - [变量](#变量)
   - [不可变与可变](#不可变与可变)
   - [变量隐藏](#变量隐藏)
   - [探索数字、文本和 true/false 值的数据类型](#探索数字文本和-truefalse-值的数据类型)
   - [内置数据类型](#内置数据类型)
     - [数字：整数和浮点数](#数字整数和浮点数)
-  - [布尔值: True 或 false](#布尔值-true-或-false)
+  - [布尔值：True 或 false](#布尔值true-或-false)
   - [文本：字符或字符串](#文本字符或字符串)
 - [元组和结构定义数据集合](#元组和结构定义数据集合)
   - [元组](#元组)
   - [结构](#结构)
-  - [字符串文本转为String类型](#字符串文本转为string类型)
+  - [字符串文本转为 String 类型](#字符串文本转为-string-类型)
 - [为复合数据使用枚举变量](#为复合数据使用枚举变量)
   - [实例化枚举](#实例化枚举)
-- [Rust中使用函数](#rust中使用函数)
+- [Rust 中使用函数](#rust-中使用函数)
   - [返回值](#返回值)
   - [查看签名](#查看签名)
 - [使用 Rust 中的 if/else 表达式测试条件](#使用-rust-中的-ifelse-表达式测试条件)
@@ -46,15 +46,15 @@ import SideNave from '../../components/SideNav.vue';
   - [获取键值](#获取键值)
   - [删除键值对](#删除键值对)
 - [使用 for、while、和 loop 表达式](#使用-forwhile和-loop-表达式)
-  - [循环while语句](#循环while语句)
-- [在Rust中处理错误](#在rust中处理错误)
+  - [循环 while 语句](#循环-while-语句)
+- [在 Rust 中处理错误](#在-rust-中处理错误)
   - [伴随着 panic 的严重错误！](#伴随着-panic-的严重错误)
-  - [使用Option类型处理缺失](#使用option类型处理缺失)
+  - [使用 Option 类型处理缺失](#使用-option-类型处理缺失)
   - [模式匹配](#模式匹配)
   - [if let 表达式](#if-let-表达式)
   - [使用`unwrap`和`expect`](#使用unwrap和expect)
   - [使用 Result 类型处理错误](#使用-result-类型处理错误)
-- [Rust如何管理内存](#rust如何管理内存)
+- [Rust 如何管理内存](#rust-如何管理内存)
   - [什么是所有权](#什么是所有权)
   - [了解借用](#了解借用)
   - [使用生存期验证引用](#使用生存期验证引用)
@@ -76,10 +76,10 @@ import SideNave from '../../components/SideNav.vue';
 */}
 </SideNave>
 
-<a href="https://learn.microsoft.com/zh-cn/training/modules/rust-modules-packages-crates/" target="_blank">_microsoft篇_</a>
+<a href="https://learn.microsoft.com/zh-cn/training/modules/rust-modules-packages-crates/" target="_blank">_microsoft 篇_</a>
 ### <a name='-1'></a>基本程序结构
-#### <a name='Rust'></a>Rust函数
-每个rust程序必须有名为`main`的函数
+#### <a name='Rust'></a>Rust 函数
+每个 rust 程序必须有名为`main`的函数
 ```
 fn main() {
   printIn!("Hello, world");
@@ -89,15 +89,15 @@ fn main() {
 #### <a name='-1'></a>代码缩进
 大多语句以`;`结尾。缩进四个空格。  
 
-#### <a name='todomacro'></a>todo!宏(macro)
-Rust中的宏类似于采用可变数量的输入参数的函数。  
+#### <a name='todomacro'></a>todo! 宏 (macro)
+Rust 中的宏类似于采用可变数量的输入参数的函数。  
 ```
 fn main() {
   todo!("Display the message by using the println!() macro");
 }
 ```
 
-#### <a name='println'></a>println!宏
+#### <a name='println'></a>println! 宏
 `println!`宏需要一个或多个输入参数，这些参数会显示在屏幕或标准输出中。
 ```
 fn main() {
@@ -113,7 +113,7 @@ fn main() {
 }
 ```
 
-### <a name='Rust-1'></a>Rust中创建和使用变量 
+### <a name='Rust-1'></a>Rust 中创建和使用变量 
 #### <a name='-1'></a>变量
 声明变量后，可将其绑定到某个值，也可稍后在程序中绑定该值。
 ```
@@ -132,10 +132,10 @@ println!("Now the number is {}.", a_number);
 ```
 
 #### <a name='-1'></a>变量隐藏
-新的声明会创建新的绑定。在Rust中，此操作称为"隐藏"，旧变量仍在，但无法再于此范围内引用它。  
+新的声明会创建新的绑定。在 Rust 中，此操作称为"隐藏"，旧变量仍在，但无法再于此范围内引用它。  
 
 #### <a name='truefalse'></a>探索数字、文本和 true/false 值的数据类型
-Rust是一种静态类型化的语言。编译器通常可以根据绑定值推断变量数据类型。多种类型必须通过使用类型注释让编译器得知特定类型。  
+Rust 是一种静态类型化的语言。编译器通常可以根据绑定值推断变量数据类型。多种类型必须通过使用类型注释让编译器得知特定类型。  
 ```
 let number: u32 = "14"
 // 编译器会发生错误
@@ -151,13 +151,13 @@ let number: u32 = "14"
 
 | 长度 | 有符号 | 无符号 |
 | :- | :- | :- |
-| 8位 | i8 | u8 |
+| 8 位 | i8 | u8 |
 | 与体系结构相关 | isize | usize |
 
-`isize` `uszie` 类型取决于运行程序的计算机类型。 64位系统使用64位类型。 默认浮点数`f64`。   
+`isize` `uszie` 类型取决于运行程序的计算机类型。 64 位系统使用 64 位类型。 默认浮点数`f64`。   
 
-#### <a name=':Truefalse'></a>布尔值: True 或 false
-`bool` 类型有两个可能值: `true`或`false`。  
+#### <a name=':Truefalse'></a>布尔值：True 或 false
+`bool` 类型有两个可能值：`true`或`false`。  
 
 #### <a name='-1'></a>文本：字符或字符串
 字符 `char`类型是最基元的文本类型。
@@ -166,10 +166,10 @@ let uppercase_s = 'S';
 let lowercase_f = 'f';
 let smiley_face = '😀';
 ```
-字符串 `str` 类型也称为"字符串切片",它是字符串数据的一种视图。字符串字面量的类型都是`&str`。  
-对于字符串未知 如用户输入等场景，Rust具有另一个名为`String`的字符串类型。此类型在堆上分配。  
+字符串 `str` 类型也称为"字符串切片", 它是字符串数据的一种视图。字符串字面量的类型都是`&str`。  
+对于字符串未知 如用户输入等场景，Rust 具有另一个名为`String`的字符串类型。此类型在堆上分配。  
 ``` 
-// 使用: char 注释语法声明字符变量
+// 使用：char 注释语法声明字符变量
 let character_1: char = 'S';
 let character_2: char = 'f';
 
@@ -191,9 +191,9 @@ println!("Is '{}' the {}th letter of the alphabet? {}", tuple_e.0, tuple_e.1, tu
 ```
 
 #### <a name='-1'></a>结构
-Rust支持三种结构类型: 经典结构、元组结构和单元结构。
+Rust 支持三种结构类型：经典结构、元组结构和单元结构。
 ```
-// 经典 C结构 最常用
+// 经典 C 结构 最常用
 struct Student { name: String, level: u8, remote: bool }
 
 // 元组
@@ -212,18 +212,18 @@ let mark_2 = Grades('B', 'A', 'A', 'C', 3.25);
 
 println!("{}, level {}. Remote: {}. Grades: {}, {}, {}, {}. Average: {}", user_1.name, user_1.level, user_1.remote, mark_1.0, mark_1.1, mark_1.2, mark_1.3, mark_1.4);
 ```
-#### <a name='String'></a>字符串文本转为String类型
+#### <a name='String'></a>字符串文本转为 String 类型
 编译器建议使用`.to_string()`函数进行转换。  
 
 ### <a name='-1'></a>为复合数据使用枚举变量
-Rust中提及的枚举通常称为代数数据类型。  
+Rust 中提及的枚举通常称为代数数据类型。  
 ```
 enum WebEvent {
   // 没有关联的数据类型或数据
   WELoad,
-  // 具有两个数据类型分别为String和char的字段
+  // 具有两个数据类型分别为 String 和 char 的字段
   WEKeys(String, char),
-  // 包含命名字段为x和y以及字段的数据类型为 i64 的匿名结构。 
+  // 包含命名字段为 x 和 y 以及字段的数据类型为 i64 的匿名结构。 
   WEClick { x: i64, y: i64 }
 }
 ```
@@ -249,8 +249,8 @@ let we_key = WebEvent::WEKeys(keys);
 
 通过 `#[derive(Debug)]` 语法可以在代码执行期间查看某些在标准输出中无法查看的值。  
 
-### <a name='Rust-1'></a>Rust中使用函数
-Rust中函数定义以`fn`关键字开头。
+### <a name='Rust-1'></a>Rust 中使用函数
+Rust 中函数定义以`fn`关键字开头。
 ```
 fn main() {
   println!("Hello, world");
@@ -278,7 +278,6 @@ fn divide_by_5(num: u32) -> u32 {
 ```
 #### <a name='-1'></a>查看签名
 函数声明的第一部分称为函数签名。  
-
 
 ### <a name='Rustifelse'></a>使用 Rust 中的 if/else 表达式测试条件
 #### <a name='-1'></a>创建和使用数组
@@ -315,7 +314,7 @@ fruit.push("Cherry");
 println!("Pop off: {:?}", fruit.pop());
 ```
 ### <a name='ifesle'></a>使用 if/esle 条件
-Rust中的`if`块也可充当表达式。
+Rust 中的`if`块也可充当表达式。
 ```
 let formal = true;
 let greeting = if formal {
@@ -354,10 +353,10 @@ println!("{:?}", reviews.get(obsolete));
 ### <a name='forwhileloop'></a>使用 for、while、和 loop 表达式
 Rust 提供三种循环：
 - `loop`: 在发生手动停止前重复代码
-- `while`: 在条件一直为true时重复代码
+- `while`: 在条件一直为 true 时重复代码
 - `for`: 对集合中的所有值重复代码
 
-`loop` 可添加特定代码停止，也可输入Ctrl+C等键盘指令停止。  
+`loop` 可添加特定代码停止，也可输入 Ctrl+C 等键盘指令停止。  
 ```
 let mut counter = 1;
 
@@ -371,7 +370,7 @@ let stop_loop = loop {
 println!("counter = {}.", stop_loop)
 ```
 断点返回相同类型的值。值类型都必须为整数、字符串或布尔等。未显示返回程序将表达式结果解释为空元组`()`。  
-#### <a name='while'></a>循环while语句
+#### <a name='while'></a>循环 while 语句
 ```
 while counter < 5 {
   println!("We loop a while...");
@@ -391,15 +390,15 @@ for number in 0..5 {
 }
 ```
 
-### <a name='Rust-1'></a>在Rust中处理错误
+### <a name='Rust-1'></a>在 Rust 中处理错误
 #### <a name='panic'></a>伴随着 panic 的严重错误！
 `panic!`宏将输出一条错误消息、清理资源、然后退出程序。  
 ```
 let v = vec![0, 1, 2, 3];
 println!("{}", v[6]);// this will cause a panic!
 ```
-#### <a name='Option'></a>使用Option类型处理缺失
-`Option<T>`在Rust代码中的使用非常广泛。它可用于处理可能存在或可能为空的值。如果要在Rust中对可选字符串建模，则需要将其显示包装在`Option`类型中:`Option<String>`。
+#### <a name='Option'></a>使用 Option 类型处理缺失
+`Option<T>`在 Rust 代码中的使用非常广泛。它可用于处理可能存在或可能为空的值。如果要在 Rust 中对可选字符串建模，则需要将其显示包装在`Option`类型中：`Option<String>`。
 ```
 enum Option<T> {
   None,   // The value doesn't exist
@@ -424,9 +423,9 @@ for &index in [0, 2, 99].iter() {
   }
 }
 ```
-使用match表达式注意规则：
-- 按照从上到下的顺序对`match` arm进行评估。必须在一般事例之前定义具体事例，否则它们将无法进行匹配和评估。 
-- `match` arm必须涵盖输入类型可能具有的每个可能值。如果你尝试根据非详尽模式列表进行匹配，则会出现编译器错误。
+使用 match 表达式注意规则：
+- 按照从上到下的顺序对`match` arm 进行评估。必须在一般事例之前定义具体事例，否则它们将无法进行匹配和评估。 
+- `match` arm 必须涵盖输入类型可能具有的每个可能值。如果你尝试根据非详尽模式列表进行匹配，则会出现编译器错误。
 
 #### <a name='iflet'></a>if let 表达式
 ```
@@ -437,11 +436,11 @@ if let Some(7) = a_number {
 ```
 
 #### <a name='unwrapexpect'></a>使用`unwrap`和`expect`
-`unwrap`方法直接访问`Option`类型内部值。如果变体是`None`，则此方法将会panic。  
-`expect`作用与`unwrap`相同，但它提供由第二个参数提供的自定义panic消息  
+`unwrap`方法直接访问`Option`类型内部值。如果变体是`None`，则此方法将会 panic。  
+`expect`作用与`unwrap`相同，但它提供由第二个参数提供的自定义 panic 消息  
 考虑使用下列方法之一：
 - 使用模式匹配显式处理`None`案例。
-- 调用类似的非panic方法，例如`unwrap_or`。
+- 调用类似的非 panic 方法，例如`unwrap_or`。
 
 #### <a name='Result'></a>使用 Result 类型处理错误
 ```
@@ -463,22 +462,22 @@ fn main() {
 }
 ```
 
-### <a name='Rust-1'></a>Rust如何管理内存
+### <a name='Rust-1'></a>Rust 如何管理内存
 
 #### <a name='-1'></a>什么是所有权
 **作用域界定规则**  
-Rust中，作用域常常由大括号`{}`表示、常见作用域包括函数体、`if` `else` `match`分支。  
+Rust 中，作用域常常由大括号`{}`表示、常见作用域包括函数体、`if` `else` `match`分支。  
 **所有权和删除**  
-Rust给范围的概念增加了一个转折。当对象超出范围时，便会将其”删除“。删除变量会释放与其关联的所有资源。  
+Rust 给范围的概念增加了一个转折。当对象超出范围时，便会将其”删除“。删除变量会释放与其关联的所有资源。  
 **移动语义**  
-有时，我们希望将某个项的所有权从一个绑定转移到另一个绑定。Rust中，”转义所有权“被称为”移动“。
+有时，我们希望将某个项的所有权从一个绑定转移到另一个绑定。Rust 中，”转义所有权“被称为”移动“。
 ```
 let mascot = String::from("ferris");
 let ferris = mascot;
 ```
 `String`的所有权从`mascot`转移到`ferris`之后，将无法再使用`mascot`变量。  
 **函数中的所有权**  
-将某个内容作为参数传递给函数，会将该内容移动到函数中。其他编程语言变量的值在传递给我们的函数之前可以隐式复制。但在rust中，此操作不会发生。  
+将某个内容作为参数传递给函数，会将该内容移动到函数中。其他编程语言变量的值在传递给我们的函数之前可以隐式复制。但在 rust 中，此操作不会发生。  
 **复制而不是转移**  
 复制数字的成本低，因此复制这些值是有意义的。复制字符串、向量或其他复杂类型的成本可能高昂，因此它们没有实现`Copy`特征，而是被移动。  
 显式复制
@@ -507,11 +506,11 @@ fn change(text: &mut String) {
 ```
 **借用和可变引用**  
 代码必须同时实现以下任一定义，但不能同时实现这两个定义：  
-- 一个或多个不可变引用(`&T`)
-- 恰好一个可变引用(`&mut T`)
+- 一个或多个不可变引用 (`&T`)
+- 恰好一个可变引用 (`&mut T`)
 
 #### <a name='-1'></a>使用生存期验证引用
-声明周期使Rust能够在不产生垃圾收集性能开销的情况下确保内存安全。  
+声明周期使 Rust 能够在不产生垃圾收集性能开销的情况下确保内存安全。  
 **在函数中注释生存期**  
 多个生存期时，生存期批注帮助编译器了解它需要使用哪个生存期，以确保引用在运行时有效。  
 ```
@@ -561,7 +560,7 @@ impl Area for Rectangle {
 - `Debug`特征，允许使用`{:?}`格式说明符来设置类型的格式，在面向程序员的调试上下文中使用。
 - `Display`特征，允许使用`{}`格式说明符来设置类型的格式，与`Debug`类似。但`Display`更适合面向用户的输出。  
 - `PartialEq`特征，允许比较实现器是否相等。 
-Rust编译器可以使用`#[derive(Trait)]`属性自动为我们实现`Debug`和`PartialEq`特征
+Rust 编译器可以使用`#[derive(Trait)]`属性自动为我们实现`Debug`和`PartialEq`特征
 ```
 #[derive(Debug, PartialEq)]
 struct Point {
@@ -594,7 +593,7 @@ fn main() {
 #### <a name='-1'></a>使用特征边界和泛型函数
 我们可以通过定义函数的方式接受不同类型的函数，因为当类型实现特征时，可以将其抽象的视为该特征。  
 #### <a name='-1'></a>使用迭代器
-Rust中所有迭代器都会实现名为`Iterator`的特征，该特征在标准库中定义，并用于通过集合实现迭代器。  
+Rust 中所有迭代器都会实现名为`Iterator`的特征，该特征在标准库中定义，并用于通过集合实现迭代器。  
 创建自己的迭代器涉及两个步骤：
 1. 创建一个结构来保留迭代器的状态。
 2. 实现该结构的迭代器。
@@ -637,14 +636,14 @@ fn main() {
 ### <a name='-1'></a>探索模块、包和第三方箱
 #### <a name='-1'></a>理解代码组织背后的概念
 * 包
-  * 包含一个或多个crate内的功能
-  * 包括有关如何生成这些crate的信息。该信息位于`Cargo.toml`文件中。
+  * 包含一个或多个 crate 内的功能
+  * 包括有关如何生成这些 crate 的信息。该信息位于`Cargo.toml`文件中。
 * 箱
-  * 是编译单元，即Rust编译器可以运行的最小代码量。
+  * 是编译单元，即 Rust 编译器可以运行的最小代码量。
   * 编译完成后，系统将生成可执行文件或库文件。
   * 其中包含未命名的隐式顶层模块。
 * 模块
-  * 是箱内的代码组织单位(或为嵌套形式)。
+  * 是箱内的代码组织单位（或为嵌套形式）。
   * 可以具有跨其他模块的递归定义。
 
 如果包中包含`src/main.rs`和`src/lib.rs`，则其中有两个箱：库文件和二进制文件。它们的名称与包相同。  
@@ -661,5 +660,3 @@ fn main() {
 如果源文件中存在`mod`声明，则在运行编译器之前，系统会将模块文件的内容插入到`mod`声明在源文件中的所在位置。系统不会对模块进行单独编译，只会编译箱。  
 
 #### <a name='-1'></a>向项目中添加第三方箱
-
-

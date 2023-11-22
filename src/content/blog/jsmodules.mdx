@@ -1,6 +1,6 @@
 ---
-title: "《js设计模式》笔记"
-description: "设计模式定义：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案。 面向对象的JavaScript"
+title: "《js 设计模式》笔记"
+description: "设计模式定义：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案。 面向对象的 JavaScript"
 pubDate: "2022/02/11"
 tag:
   - 笔记
@@ -15,29 +15,29 @@ import SideNave from '../../components/SideNav.vue';
 <!-- vscode-markdown-toc -->
 */}
 - [基础](#基础)
-  - [面向对象的JavaScript](#面向对象的javascript)
-    - [1.1动态类型语言和鸭子类型](#11动态类型语言和鸭子类型)
-    - [1.2多态](#12多态)
-      - [1.2.4使用继承得到多态效果](#124使用继承得到多态效果)
-      - [JavaScript的多态是与生俱来的](#javascript的多态是与生俱来的)
+  - [面向对象的 JavaScript](#面向对象的-javascript)
+    - [1.1 动态类型语言和鸭子类型](#11-动态类型语言和鸭子类型)
+    - [1.2 多态](#12-多态)
+      - [1.2.4 使用继承得到多态效果](#124-使用继承得到多态效果)
+      - [JavaScript 的多态是与生俱来的](#javascript-的多态是与生俱来的)
       - [多态在面向对象程序设计中的作用](#多态在面向对象程序设计中的作用)
       - [设计模式与多态](#设计模式与多态)
-    - [1.3封装](#13封装)
+    - [1.3 封装](#13-封装)
       - [封装数据](#封装数据)
       - [封装实现](#封装实现)
       - [封装类型](#封装类型)
       - [封装变化](#封装变化)
-    - [原型模式和基于原型继承的JavaScript对象系统](#原型模式和基于原型继承的javascript对象系统)
+    - [原型模式和基于原型继承的 JavaScript 对象系统](#原型模式和基于原型继承的-javascript-对象系统)
       - [使用克隆的原型模式](#使用克隆的原型模式)
       - [克隆是创建对象的手段](#克隆是创建对象的手段)
-      - [1.4.3体验lo语言](#143体验lo语言)
+      - [1.4.3 体验 lo 语言](#143-体验-lo-语言)
       - [原型编程泛型的一些规则](#原型编程泛型的一些规则)
-      - [JavaScript中的原型继承](#javascript中的原型继承)
+      - [JavaScript 中的原型继承](#javascript-中的原型继承)
       - [原型继承的未来](#原型继承的未来)
-- [this、call和apply](#thiscall和apply)
+- [this、call 和 apply](#thiscall-和-apply)
   - [this](#this)
-    - [this的指向大致可以分为](#this的指向大致可以分为)
-      - [丢失的this](#丢失的this)
+    - [this 的指向大致可以分为](#this-的指向大致可以分为)
+      - [丢失的 this](#丢失的-this)
 - [闭包和高阶函数](#闭包和高阶函数)
   - [闭包](#闭包)
       - [变量的生存周期](#变量的生存周期)
@@ -48,19 +48,19 @@ import SideNave from '../../components/SideNav.vue';
     - [高阶函数](#高阶函数)
       - [函数作为参数传递](#函数作为参数传递)
       - [函数作为返回值输出](#函数作为返回值输出)
-      - [高阶函数实现AOP](#高阶函数实现aop)
+      - [高阶函数实现 AOP](#高阶函数实现-aop)
       - [高阶函数的其它应用](#高阶函数的其它应用)
 - [设计模式](#设计模式)
   - [单例模式](#单例模式)
     - [实现单例模式](#实现单例模式)
     - [透明的单例模式](#透明的单例模式)
     - [用代理实现单例模式](#用代理实现单例模式)
-    - [4.4 JavaScript中的单例模式](#44-javascript中的单例模式)
+    - [4.4 JavaScript 中的单例模式](#44-javascript-中的单例模式)
     - [惰性单例](#惰性单例)
     - [通用的惰性单例](#通用的惰性单例)
   - [策略模式](#策略模式)
     - [使用策略模式计算奖金](#使用策略模式计算奖金)
-    - [JavaScript版本的策略模式](#javascript版本的策略模式)
+    - [JavaScript 版本的策略模式](#javascript-版本的策略模式)
     - [多态在策略模式中的体现](#多态在策略模式中的体现)
     - [使用策略模式实现缓动动画](#使用策略模式实现缓动动画)
       - [实现动画效果的原理](#实现动画效果的原理)
@@ -71,17 +71,17 @@ import SideNave from '../../components/SideNav.vue';
       - [用策略模式重构表单校验](#用策略模式重构表单校验)
       - [给某个文本输入框添加多种校验规则](#给某个文本输入框添加多种校验规则)
     - [策略模式的优缺点](#策略模式的优缺点)
-    - [5.8一等函数对象与策略模式](#58一等函数对象与策略模式)
+    - [5.8 一等函数对象与策略模式](#58-一等函数对象与策略模式)
   - [代理模式](#代理模式)
     - [保护代理和虚拟代理](#保护代理和虚拟代理)
     - [虚拟代理实现图片预加载](#虚拟代理实现图片预加载)
     - [代理的意义](#代理的意义)
     - [代理和本体接口的一致性](#代理和本体接口的一致性)
-    - [虚拟代理合并HTTP请求](#虚拟代理合并http请求)
+    - [虚拟代理合并 HTTP 请求](#虚拟代理合并-http-请求)
     - [虚拟代理在惰性加载中的应用](#虚拟代理在惰性加载中的应用)
     - [缓存代理](#缓存代理)
       - [计算乘积](#计算乘积)
-      - [缓存代理用于ajax异步请求数据](#缓存代理用于ajax异步请求数据)
+      - [缓存代理用于 ajax 异步请求数据](#缓存代理用于-ajax-异步请求数据)
     - [用高阶函数动态创建代理](#用高阶函数动态创建代理)
     - [其他代理模式](#其他代理模式)
   - [迭代器模式](#迭代器模式)
@@ -93,7 +93,7 @@ import SideNave from '../../components/SideNav.vue';
     - [迭代器模式的应用举例](#迭代器模式的应用举例)
   - [发布--订阅模式](#发布--订阅模式)
     - [发布-订阅模式的作用](#发布-订阅模式的作用)
-    - [DOM事件](#dom事件)
+    - [DOM 事件](#dom-事件)
     - [自定义事件](#自定义事件)
     - [发布-订阅模式的通用实现](#发布-订阅模式的通用实现)
     - [取消订阅的事件](#取消订阅的事件)
@@ -102,12 +102,12 @@ import SideNave from '../../components/SideNav.vue';
     - [模块间通信](#模块间通信)
     - [必须先订阅再发布吗](#必须先订阅再发布吗)
     - [全局事件的命名冲突](#全局事件的命名冲突)
-    - [JavaScript实现发布-订阅模式的便利性](#javascript实现发布-订阅模式的便利性)
+    - [JavaScript 实现发布-订阅模式的便利性](#javascript-实现发布-订阅模式的便利性)
     - [小结](#小结)
   - [命令模式](#命令模式)
     - [命令模式的用途](#命令模式的用途)
     - [命令模式的例子--菜单程序](#命令模式的例子--菜单程序)
-    - [JavaScript中的命令模式](#javascript中的命令模式)
+    - [JavaScript 中的命令模式](#javascript-中的命令模式)
     - [撤销命令](#撤销命令)
     - [撤销和重做](#撤销和重做)
     - [宏命令](#宏命令)
@@ -145,7 +145,7 @@ import SideNave from '../../components/SideNav.vue';
     - [实际开发中的职责链模式](#实际开发中的职责链模式)
     - [灵活可拆分的职责链节点](#灵活可拆分的职责链节点)
     - [异步的职责链](#异步的职责链)
-    - [用AOP实现职责链](#用aop实现职责链)
+    - [用 AOP 实现职责链](#用-aop-实现职责链)
   - [中介者模式](#中介者模式)
     - [中介者模式的例子--泡泡堂游戏](#中介者模式的例子--泡泡堂游戏)
     - [中介者模式的例子--购买商品](#中介者模式的例子--购买商品)
@@ -153,10 +153,10 @@ import SideNave from '../../components/SideNav.vue';
   - [装饰着模式](#装饰着模式)
     - [模拟传统](#模拟传统)
     - [装饰着也是包装器](#装饰着也是包装器)
-    - [JavaScript的装饰者](#javascript的装饰者)
+    - [JavaScript 的装饰者](#javascript-的装饰者)
     - [装饰函数](#装饰函数)
-    - [用AOP装饰函数](#用aop装饰函数)
-    - [AOP的应用实例](#aop的应用实例)
+    - [用 AOP 装饰函数](#用-aop-装饰函数)
+    - [AOP 的应用实例](#aop-的应用实例)
     - [装饰者模式和代理模式](#装饰者模式和代理模式)
   - [状态模式](#状态模式)
     - [初识状态模式](#初识状态模式)
@@ -166,7 +166,7 @@ import SideNave from '../../components/SideNav.vue';
     - [状态模式的优缺点](#状态模式的优缺点)
     - [状态模式中的性能优化点](#状态模式中的性能优化点)
     - [状态模式和策略模式的关系](#状态模式和策略模式的关系)
-    - [JavaScript版本的状态机](#javascript版本的状态机)
+    - [JavaScript 版本的状态机](#javascript-版本的状态机)
     - [表驱动的有限状态机](#表驱动的有限状态机)
     - [实际项目中的其它状态机](#实际项目中的其它状态机)
   - [适配器模式](#适配器模式)
@@ -175,10 +175,10 @@ import SideNave from '../../components/SideNav.vue';
     - [小结](#小结-4)
 - [设计原则和编程技巧](#设计原则和编程技巧)
   - [单一职责原则](#单一职责原则)
-    - [设计模式中的SRP原则](#设计模式中的srp原则)
+    - [设计模式中的 SRP 原则](#设计模式中的-srp-原则)
     - [何时应该分离职责](#何时应该分离职责)
-    - [违反SRP原则](#违反srp原则)
-    - [SRP原则的优缺点](#srp原则的优缺点)
+    - [违反 SRP 原则](#违反-srp-原则)
+    - [SRP 原则的优缺点](#srp-原则的优缺点)
   - [最少知识原则](#最少知识原则)
     - [减少对象之间的联系](#减少对象之间的联系)
     - [设计模式中的最少知识原则](#设计模式中的最少知识原则)
@@ -191,7 +191,7 @@ import SideNave from '../../components/SideNav.vue';
     - [开放-封闭原则的相对性](#开放-封闭原则的相对性)
     - [接受第一次愚弄](#接受第一次愚弄)
   - [接口和面向接口编程](#接口和面向接口编程)
-    - [typescript版本的命令模式](#typescript版本的命令模式)
+    - [typescript 版本的命令模式](#typescript-版本的命令模式)
   - [代码重构](#代码重构)
     - [提炼函数](#提炼函数)
     - [合并重复的条件片段](#合并重复的条件片段)
@@ -203,7 +203,7 @@ import SideNave from '../../components/SideNav.vue';
     - [少用三目运算符](#少用三目运算符)
     - [合理使用链式调用](#合理使用链式调用)
     - [分解大型类](#分解大型类)
-    - [用return退出多重循环](#用return退出多重循环)
+    - [用 return 退出多重循环](#用-return-退出多重循环)
 
 {/*
 <!-- vscode-markdown-toc-config
@@ -217,11 +217,11 @@ import SideNave from '../../components/SideNav.vue';
 > 设计模式定义：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案
 
 ## <a name=''></a>基础
-### <a name='JavaScript'></a>面向对象的JavaScript
-#### <a name='-1'></a>1.1动态类型语言和鸭子类型
-鸭子类型指导我们只关注对象的行为，而不关注对象本身，也就是关注HAS-A，而不是IS-A。  
+### <a name='JavaScript'></a>面向对象的 JavaScript
+#### <a name='-1'></a>1.1 动态类型语言和鸭子类型
+鸭子类型指导我们只关注对象的行为，而不关注对象本身，也就是关注 HAS-A，而不是 IS-A。  
 借助鸭子类型思想，轻松地在动态类型语言中实现一个原则：“面向接口编程，而不是面向实现编程”。  
-#### <a name='-1'></a>1.2多态
+#### <a name='-1'></a>1.2 多态
 同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果。  
 做什么、谁去做以及怎样去做 - 将“不变的事物”与“可能改变的事物”分离开来。  
 ```javascript
@@ -240,16 +240,16 @@ Chicken.prototype.sound = function() {
 makeSound(new Duck())
 makeSound(new Chicken())
 ```
-##### 1.2.4使用继承得到多态效果
+##### 1.2.4 使用继承得到多态效果
 继承通常包括实现继承和接口继承。  
-##### JavaScript的多态是与生俱来的
+##### JavaScript 的多态是与生俱来的
 ##### 多态在面向对象程序设计中的作用
 多态最根本的作用就是通过把过程化的条件分支语句转化为对象的多态性，从而消除这些条件分支语句。 将行为分布在各个对象中，并让这些对象各自负责自己的行为，这正是面向对象设计的优点。  
 ##### 设计模式与多态
-#### <a name='-1'></a>1.3封装
+#### <a name='-1'></a>1.3 封装
 封装的目的是将信息隐藏。一般是封装数据和封装实现。 我们讨论更广义的封装，包括封装类型和封装变化。  
 ##### 封装数据
-JavaScript只能依赖变量的作用域来实现封装特性，而且只能模拟出public和private这两个封装特性。  
+JavaScript 只能依赖变量的作用域来实现封装特性，而且只能模拟出 public 和 private 这两个封装特性。  
 ```javascript
 var myObj = (function() {
   var _name = 'sven'  //私有变量
@@ -267,28 +267,28 @@ console.log(myObj._name)  // undefined
 ##### 封装类型
 封装类型是静态类型语言中一种重要的封装方式。一般封装类型是通过象类和接口来进行地。 
 ##### 封装变化
-23种设计模式从意图上可被划分为创建型模式、结构性模式和行为型模式。  
+23 种设计模式从意图上可被划分为创建型模式、结构性模式和行为型模式。  
 创建型模式的目的就是封装创建对象的变化。而结构型模式封装的是对象之间的组合关系。行为型模式封装的是对象的行为变化。  
-#### <a name='JavaScript-1'></a>原型模式和基于原型继承的JavaScript对象系统
+#### <a name='JavaScript-1'></a>原型模式和基于原型继承的 JavaScript 对象系统
 原型模式不单是一种设计模式，也被称为一种编程泛型。  
 ##### 使用克隆的原型模式
 如果我们要创建一个对象，一种方法是先指定它的类型，然后通过类来创建这个对象。原型模式是找到一个对象，然后通过克隆来创建一个一摸一样的对象。  
-ES5提供了Object.create方法来克隆对象。  
+ES5 提供了 Object.create 方法来克隆对象。  
 ##### 克隆是创建对象的手段
-依赖倒置原则提醒我们创建对象的时候要避免依赖具体类型，而用new XXX创建对象的方式显得很僵硬。原型模式通过克隆对象不用在关心对象的具体类型名字。  
-##### 1.4.3体验lo语言
-在JavaScript语言中不存在类的概念，对象也并非从类中创建出来的，所有的JavaScript对象都是从某个对象上克隆而来的。  
+依赖倒置原则提醒我们创建对象的时候要避免依赖具体类型，而用 new XXX 创建对象的方式显得很僵硬。原型模式通过克隆对象不用在关心对象的具体类型名字。  
+##### 1.4.3 体验 lo 语言
+在 JavaScript 语言中不存在类的概念，对象也并非从类中创建出来的，所有的 JavaScript 对象都是从某个对象上克隆而来的。  
 ##### 原型编程泛型的一些规则
 · 所有的数据都是对象； · 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它； · 对象会记住它的原型； · 如果对象无法响应某个请求，他会把这个请求委托给它的原型。  
-##### JavaScript中的原型继承
-1.所有数据都是对象  
- JavaScript有两套类型机制：基本类型和对象类型。number、boolean、string这几种基本类型数据也可以通过“包装类”的方式变成对象类型数据来处理。 JavaScript中的根对象是Object.prototype对象。  
-2.要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它  
- JavaScript中的函数既可以作为普通函数被调用，也可以作为构造器被调用。当使用new运算符来调用函数时，此时的函数就是一个构造器。用new运算符来创建对象的过程，实际上也只是先克隆Object.prototype对象，再进行一些其它额外操作的过程。  
-3.对象会记住它的原型  
+##### JavaScript 中的原型继承
+1. 所有数据都是对象  
+ JavaScript 有两套类型机制：基本类型和对象类型。number、boolean、string 这几种基本类型数据也可以通过“包装类”的方式变成对象类型数据来处理。 JavaScript 中的根对象是 Object.prototype 对象。  
+2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它  
+ JavaScript 中的函数既可以作为普通函数被调用，也可以作为构造器被调用。当使用 new 运算符来调用函数时，此时的函数就是一个构造器。用 new 运算符来创建对象的过程，实际上也只是先克隆 Object.prototype 对象，再进行一些其它额外操作的过程。  
+3. 对象会记住它的原型  
  __proto__是对象跟“对象构造器的原型”联系起来的纽带。  
-4.如果对象无法响应某个请求，他会把这个请求委托给它的原型  
- 对象构造器的原型并不仅限于Object.prototype对象，而是可以动态指向其它对象。  
+4. 如果对象无法响应某个请求，他会把这个请求委托给它的原型  
+ 对象构造器的原型并不仅限于 Object.prototype 对象，而是可以动态指向其它对象。  
  ```javascript
  var obj = {name: 'sven'}
  var A = function() {}
@@ -298,13 +298,13 @@ ES5提供了Object.create方法来克隆对象。
  ```
  继承总是发生在对象和对象之间。  
 ##### 原型继承的未来
-通过Object.create来创建对象的效率要比通过构造函数创建对象慢，通过Object.create(null)可以创建出没有原型的对象。  
-## <a name='thiscallapply'></a>this、call和apply
+通过 Object.create 来创建对象的效率要比通过构造函数创建对象慢，通过 Object.create(null) 可以创建出没有原型的对象。  
+## <a name='thiscallapply'></a>this、call 和 apply
 ### <a name='this'></a>this
-JavaScript的this总是指向一个对象，而具体指向哪个对象是再运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境。  
-#### <a name='this-1'></a>this的指向大致可以分为
-· 作为对象的方法调用； · 作为普通函数调用； · 构造器调用； · Function.prototype.call或Function.prototype.apply调用。  
-1.this指向该对象； 2.指向全局对象window； 3.当用new运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的this就指向返回的这个对象。如果构造器显式的返回了一个object类型的对象，那么此次运算结果最终返回这个对象，而不是我们之前期待的this。 
+JavaScript 的 this 总是指向一个对象，而具体指向哪个对象是再运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境。  
+#### <a name='this-1'></a>this 的指向大致可以分为
+· 作为对象的方法调用； · 作为普通函数调用； · 构造器调用； · Function.prototype.call 或 Function.prototype.apply 调用。  
+1.this 指向该对象； 2. 指向全局对象 window； 3. 当用 new 运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的 this 就指向返回的这个对象。如果构造器显式的返回了一个 object 类型的对象，那么此次运算结果最终返回这个对象，而不是我们之前期待的 this。 
 ```javascript
 var MyClass = function() {
   this.name = 'sven'
@@ -315,15 +315,15 @@ var MyClass = function() {
 var obj = new MyClass()
 console.log(obj.name) // anne
 ``` 
-4.动态改变传入函数的this；  
-##### 丢失的this
+4. 动态改变传入函数的 this；  
+##### 丢失的 this
 ## <a name='-1'></a>闭包和高阶函数
 闭包的形成与变量的作用域以及变量的生存周期密切相关。  
 ### <a name='-1'></a>闭包
 ##### 变量的生存周期
-全局变量的生存周期时永久的，除非主动销毁。 对于函数内用var关键字声明的局部变量来说，当退出函数时随着函数调用的结束而被销毁。  
+全局变量的生存周期时永久的，除非主动销毁。 对于函数内用 var 关键字声明的局部变量来说，当退出函数时随着函数调用的结束而被销毁。  
 ##### 闭包的更多作用
-1.封装变量 闭包可以帮助把一些不需要暴露在全局的变量封装成“私有变量”。  
+1. 封装变量 闭包可以帮助把一些不需要暴露在全局的变量封装成“私有变量”。  
 ```javascript
 var mult = (function() {
   var cache = {}
@@ -343,22 +343,22 @@ var mult = (function() {
   }
 })()
 ```
-2.延续局部变量的寿命  
+2. 延续局部变量的寿命  
 ##### 闭包和面向对象设计
 对象以方法的形式包含了过程，而闭包则是在过程中以环境的形式包含了数据。通常用面向对象思想能实现的功能，用闭包也能实现。  
 ##### 用闭包实现命令模式
-命令模式的意图是把请求封装为对象，从而分离请求的发起者和请求的接收者(执行者)之间的耦合关系。 
+命令模式的意图是把请求封装为对象，从而分离请求的发起者和请求的接收者（执行者）之间的耦合关系。 
 ##### 闭包与内存管理
-跟闭包和内存泄漏有关系的地方是，使用闭包的同时比较容易形成循环引用，如果闭包的作用域链中保存着一些DOM节点，这时候就有可能造成内存泄漏。  
+跟闭包和内存泄漏有关系的地方是，使用闭包的同时比较容易形成循环引用，如果闭包的作用域链中保存着一些 DOM 节点，这时候就有可能造成内存泄漏。  
 #### <a name='-1'></a>高阶函数
 高阶函数是指至少满足 · 函数可以作为参数被传递 · 函数可以作为返回值传出 之一的函数。  
 ##### 函数作为参数传递 
 把函数当作参数传递，这代表我们可以抽离出一部分容易变化的业务逻辑，把这部分业务逻辑放在函数参数中，这样可以分离业务代码中变化与不变的部分。  
-1.回调函数  异步请求、作为参数“委托”给其它函数执行。  
+1. 回调函数  异步请求、作为参数“委托”给其它函数执行。  
 2.Array.prototype.sort  
 ##### 函数作为返回值输出
 让函数继续返回一个可执行的函数，意味着运算过程是可延续的。  
-1.判断数据的类型 `Object.prototype.toString.call([1,2,3]) // [object Array]` `Object.prototype.toString.call('str') // [object String]` 
+1. 判断数据的类型 `Object.prototype.toString.call([1,2,3]) // [object Array]` `Object.prototype.toString.call('str') // [object String]` 
 ```javascript
 var isType = function(type) {
   return function(obj) {
@@ -379,13 +379,13 @@ var getSingle = function(fn){
   }
 }
 ```
-##### 高阶函数实现AOP
-AOP(面向切面编程)的主要作用是把一些跟核心业务逻辑模块无关的功能抽离出来，这些跟业务逻辑无关的功能通常包括日志统计、安全控制、异常处理等。抽离出后再通过“动态织入”的方式掺入业务逻辑模块中。  
+##### 高阶函数实现 AOP
+AOP（面向切面编程）的主要作用是把一些跟核心业务逻辑模块无关的功能抽离出来，这些跟业务逻辑无关的功能通常包括日志统计、安全控制、异常处理等。抽离出后再通过“动态织入”的方式掺入业务逻辑模块中。  
 ```javascript
 Function.prototype.before = function(beforefn){
   var __self = this
   return function() {
-    beforefn.apply(this, arguments) //执行新函数，修正this
+    beforefn.apply(this, arguments) //执行新函数，修正 this
     return __self.apply(this, arguments)  //执行原函数
   }
 }
@@ -407,9 +407,9 @@ func = func.before(function() {
 })
 func()
 ```
-这种使用AOP的方式来给函数添加职责，也是JavaScript语言中一种非常特别和巧妙的装饰着模式实现。  
+这种使用 AOP 的方式来给函数添加职责，也是 JavaScript 语言中一种非常特别和巧妙的装饰着模式实现。  
 ##### 高阶函数的其它应用
-1.currying  函数柯里化,又称部分求值。  一个currying会函数接受一些参数 之后，该函数不立即求职，而是继续返回另外一个函数，刚才传入的参数在函数形成的闭包中被保存起来。待到函数被真正需要求值时之前传入的所有参数都会被一次性用于求值。    
+1.currying  函数柯里化，又称部分求值。  一个 currying 会函数接受一些参数 之后，该函数不立即求职，而是继续返回另外一个函数，刚才传入的参数在函数形成的闭包中被保存起来。待到函数被真正需要求值时之前传入的所有参数都会被一次性用于求值。    
 ```javascript
 var currying = function(fn){
   var args = []
@@ -431,13 +431,13 @@ var cost = (function() {
     return money
   }
 })()
-var cost = currying(cost) //转化成currying函数
+var cost = currying(cost) //转化成 currying 函数
 cost(100) // 未真正求职
 cost(200) // 未真正求职
 cost(300) // 未真正求职
 console.log(cost())   //求值并输出： 600
 ```
-2.uncurrying call和apply可以让一个对象借用原本不属于它的方法。  
+2.uncurrying call 和 apply 可以让一个对象借用原本不属于它的方法。  
 ```javascript
 Function.prototype.uncurrying = function() {
   var self = this
@@ -460,9 +460,9 @@ Array.forEach(obj, function(i, n){
   console.log(n)
 })
 ```
-3.函数节流
- _1)_ 函数被频繁调用的场景  · window.onresize事件 · mousemove事件 · 上传进度  
- _2)_ 函数节流的原理  我们可以按时间段忽略掉一些事件请求 借助setTimeout
+3. 函数节流
+ _1)_ 函数被频繁调用的场景  · window.onresize 事件 · mousemove 事件 · 上传进度  
+ _2)_ 函数节流的原理  我们可以按时间段忽略掉一些事件请求 借助 setTimeout
  _3)_ 代码实现
 ```javascript
 var throttle = function(fn, interval){
@@ -490,8 +490,8 @@ window.onresize = throttle(function() {
   console.log(1)
 }, 500)
 ```
-4.分时函数
-渲染数据量大的列表 - timeChunk函数让创建节点的工作分批进行
+4. 分时函数
+渲染数据量大的列表 - timeChunk 函数让创建节点的工作分批进行
 ```javascript
 var timeChunk = function(ary, fn, count){
   var obj, t
@@ -512,7 +512,7 @@ var timeChunk = function(ary, fn, count){
   }
 }
 ```
-5.惰性加载函数
+5. 惰性加载函数
 ```javascript
 var addEvent = function(elem, type, handler){
   if(window.addEventListener){
@@ -568,10 +568,10 @@ var ProxySingletonCreateDiv = (function() {
   }
 })()
 ```
-#### <a name='JavaScript-1'></a>4.4 JavaScript中的单例模式
-单例模式的核心是确保只有一个实例，并提供全局访问。 在JavaScript中，我们经常把全局变量当成单例来使用例如`var a = {}` 。  
-全局变量的问题： 很容易造成命名空间的污染(变量冲突)。 降低全局变量命名污染的几种方式  
-1.使用命名空间  
+#### <a name='JavaScript-1'></a>4.4 JavaScript 中的单例模式
+单例模式的核心是确保只有一个实例，并提供全局访问。 在 JavaScript 中，我们经常把全局变量当成单例来使用例如`var a = {}` 。  
+全局变量的问题： 很容易造成命名空间的污染（变量冲突）。 降低全局变量命名污染的几种方式  
+1. 使用命名空间  
 ```javascript
 var namespace1 = {
   a: function() {},
@@ -594,7 +594,7 @@ MyApp.namespace('attr.value')
 MyApp.namespace('dom.style.width')
 console.dir(MyApp)
 ```
-2.使用闭包封装私有变量  
+2. 使用闭包封装私有变量  
 ```javascript
 var user = (function() {
   var __name = 'sven',
@@ -623,7 +623,7 @@ var createLoginLayer = (function() {
 })()
 ```
 #### <a name='-1'></a>通用的惰性单例
-上节例子， · 违反单一职责原则； · 创建页面中唯一标签，把createLoginLayer函数几乎照抄一遍。  
+上节例子， · 违反单一职责原则； · 创建页面中唯一标签，把 createLoginLayer 函数几乎照抄一遍。  
 ```javascript
 var getSingle = function(fn){
   var result
@@ -643,14 +643,12 @@ var render = function() {
   bindEvent()
 }
 render()
-render()
-render()
-/// div实际上只被绑定了一个事件
+/// div 实际上只被绑定了一个事件
 ```
 ### <a name='-1'></a>策略模式
 策略模式定义：定义一系列算法，把他们一个一个封装起来，并且使他们可以相互替换。  
 #### <a name='-1'></a>使用策略模式计算奖金
-1.最初代码实现
+1. 最初代码实现
 ```javascript
 var calculateBonus = function(performanceLevel, salary){
   if(performanceLevel === 'S'){
@@ -664,8 +662,8 @@ var calculateBonus = function(performanceLevel, salary){
   }
 }
 ```
-缺陷 · 函数比较庞大，包含很多if-else； · 函数缺乏弹性； · 算法复用性差  
-2.使用组合函数重构代码
+缺陷 · 函数比较庞大，包含很多 if-else； · 函数缺乏弹性； · 算法复用性差  
+2. 使用组合函数重构代码
 ```javascript
 var performanceS = function(salary){
   return salary * 4
@@ -688,8 +686,8 @@ var calculateBonus = function(performanceLevel, salary){
   }
 }
 ```
-3.使用策略模式重构代码  策略模式的目的就是将算法的使用与算法的实现分离开来。  
-一个基于策略模式的程序至少由两部分组成。一部分是一组策略类，封装了具体算法并负责具体的计算过程，二部分是环境类Context,Context接受客户的请求，随后把请求委托给某一个策略类。  
+3. 使用策略模式重构代码  策略模式的目的就是将算法的使用与算法的实现分离开来。  
+一个基于策略模式的程序至少由两部分组成。一部分是一组策略类，封装了具体算法并负责具体的计算过程，二部分是环境类 Context,Context 接受客户的请求，随后把请求委托给某一个策略类。  
 ```javascript
 var performanceS = function(){}
 performanceS.prototype.calculate = function(salary){
@@ -719,7 +717,7 @@ Bonus.prototype.getBonus = function(){
   return this.strategy.calculate(this.salary)
 }
 ```
-#### <a name='JavaScript-1'></a>JavaScript版本的策略模式
+#### <a name='JavaScript-1'></a>JavaScript 版本的策略模式
 ```javascript
 var strategies = {
   'S': function(salary) {
@@ -737,7 +735,7 @@ var calculateBonus = function(level, salary){
 }
 ```
 #### <a name='-1'></a>多态在策略模式中的体现
-替换context中当前保存的策略对象，便能执行不同的算法来得到我们想要的结果。  
+替换 context 中当前保存的策略对象，便能执行不同的算法来得到我们想要的结果。  
 #### <a name='-1'></a>使用策略模式实现缓动动画 
 ##### 实现动画效果的原理
 不断改变属性  
@@ -792,7 +790,7 @@ Animate.prototype.start = function(propertyName, endPos, duration, easing){
   }, 19)
 }
 ```
-· propertyName: 要改变的css属性名； · endPos：小球运动的目标位置； · duration： 动画持续时间； · easing： 缓动算法。  
+· propertyName: 要改变的 css 属性名； · endPos：小球运动的目标位置； · duration： 动画持续时间； · easing： 缓动算法。  
 ```javascript
 Animate.prototype.step = function() {
   var t = +new Date
@@ -813,7 +811,7 @@ Animate.prototype.update = function(pos) {
 #### <a name='-1'></a>更广义的算法
 业务规则指向的目标一致，并且可以被替换使用，我们就可以用策略模式来封装它们。  
 #### <a name='-1'></a>表单校验
-注册页面  · 用户名不能为空； · 密码长度不能少于6位； · 手机号码必须符合格式。  
+注册页面  · 用户名不能为空； · 密码长度不能少于 6 位； · 手机号码必须符合格式。  
 ##### 用策略模式重构表单校验
 ```javascript
 var strategies = {
@@ -834,7 +832,7 @@ var strategies = {
   }
 }
 ```
-Validator类在这里作为Context，负责接收用户的请求并委托给strategy对象。  
+Validator 类在这里作为 Context，负责接收用户的请求并委托给 strategy 对象。  
 ```javascript
 var Validator = function() {
   this.cache = []
@@ -858,7 +856,7 @@ Validator.prototype.start = function(){
 
 //
 validator.add(registerForm.userName, 'isNonEmpty', '用户名不能为空')
-validator.add(registerForm.userName, 'minLength: 10', '用户名长度不能小于10位')
+validator.add(registerForm.userName, 'minLength: 10', '用户名长度不能小于 10 位')
 ```
 ##### 给某个文本输入框添加多种校验规则
 ```javascript
@@ -916,26 +914,26 @@ validator.add(registerForm.userName, [{
   errorMsg: '用户名不能为空'
 }, {
   strategy: 'minLength: 10',
-  errorMsg: '密码长度不能小于10位'
+  errorMsg: '密码长度不能小于 10 位'
 }])
 ```
 #### <a name='-1'></a>策略模式的优缺点
 - 策略模式利用组合、委托和多态等技术和思想，可以有效的避免多重条件选择语句。
-- 策略模式提供了对开放-封闭原则的完美支持，将算法封装在独立的strategy中，使得他们易于切换，易于理解，易于扩展。  
+- 策略模式提供了对开放-封闭原则的完美支持，将算法封装在独立的 strategy 中，使得他们易于切换，易于理解，易于扩展。  
 - 策略模式中的算法也可以复用在系统的其他地方，从而避免许多重复的复制粘贴工作。
-- 在策略模式中利用组合和委托来让Context拥有执行算法的能力，这也是继承的一种更轻便的替代方案。  
+- 在策略模式中利用组合和委托来让 Context 拥有执行算法的能力，这也是继承的一种更轻便的替代方案。  
  _缺点_  
-- 会在程序中增加许多策略类或策略对象，但实际上这比把他们负责的逻辑堆砌在Context中要好。
-- 要使用策略模式必须了解所有的strategy，必须了解各个strategy之间的不同点，这样才能选择一个合适的strategy。  
-#### <a name='-1'></a>5.8一等函数对象与策略模式
-> 在函数作为一等对象的语言中，策略模式是隐形的。strategy就是值为函数的变量。  
-在JavaScript中，“函数对象的多态性”来得更加简单。  
+- 会在程序中增加许多策略类或策略对象，但实际上这比把他们负责的逻辑堆砌在 Context 中要好。
+- 要使用策略模式必须了解所有的 strategy，必须了解各个 strategy 之间的不同点，这样才能选择一个合适的 strategy。  
+#### <a name='-1'></a>5.8 一等函数对象与策略模式
+> 在函数作为一等对象的语言中，策略模式是隐形的。strategy 就是值为函数的变量。  
+在 JavaScript 中，“函数对象的多态性”来得更加简单。  
 ### <a name='-1'></a>代理模式
 代理模式是为一个对象提供一个代用品或占位符，以便控制对它的访问。  
 代理模式的关键是，当客户不方便直接访问一个对象或者不满足需要的时候，提供一个替身对象来控制这个对象的访问。  
 #### <a name='-1'></a>保护代理和虚拟代理
 虚拟代理把一些开销很大的代理对象，延迟到真正需要它的时候才去创建。  
-保护代理用于控制不同权限的对象对目标对象的访问。 在JavaScript中不易实现保护代理。  
+保护代理用于控制不同权限的对象对目标对象的访问。 在 JavaScript 中不易实现保护代理。  
 #### <a name='-1'></a>虚拟代理实现图片预加载
 ```javascript
 var myImage = (function() {
@@ -962,10 +960,10 @@ var proxyImage = (function() {
 proxyImage.setSrc('http://imgcache.qq.com/music/photo/k/000GGDys0yAoNk.jpg')
 ```
 #### <a name='-1'></a>代理的意义
-单一职责原则指，就一个类(通常也包括对象和函数等)而言，应该仅有一个引起它变化的原因。  
+单一职责原则指，就一个类（通常也包括对象和函数等）而言，应该仅有一个引起它变化的原因。  
 #### <a name='-1'></a>代理和本体接口的一致性
 · 用户可以放心地请求代理，他只关心是否能得到想要的结果。  · 在任何使用本地的地方都可以替换成使用代理。  
-如果代理对象和本体对象都为一个函数(函数也是对象)，函数必然都能被执行，则可以认为他们也具有一致的“接口”。  
+如果代理对象和本体对象都为一个函数（函数也是对象），函数必然都能被执行，则可以认为他们也具有一致的“接口”。  
 ```javascript
 var myImage = (function(){
   var imgNode = document.createElement( 'img' )
@@ -986,10 +984,10 @@ var proxyImage = (function(){
 })()
 proxyImage('http://imgcache.qq.com/music/n/k/000GGDys0ys0yA0Nk.jpg')
 ```
-#### <a name='HTTP'></a>虚拟代理合并HTTP请求
+#### <a name='HTTP'></a>虚拟代理合并 HTTP 请求
 ```javascript
 var synchronousFile = function(id){
-  console.log('开始同步文件， id为： ' + id)
+  console.log('开始同步文件， id 为： ' + id)
 }
 var proxySynchoronousFile = (function(){
   var cache = [],
@@ -1077,9 +1075,8 @@ var proxyMult = (function(){
   }
 })()
 proxyMult(1, 2, 3, 4)
-proxyMult(1, 2, 3, 4)
 ```
-##### 缓存代理用于ajax异步请求数据
+##### 缓存代理用于 ajax 异步请求数据
 #### <a name='-1'></a>用高阶函数动态创建代理
 ```javascript
 var mult = function(){
@@ -1130,9 +1127,9 @@ each([1, 2, 3, 4], function(i, n){
 })
 ```
 #### <a name='-1'></a>内部迭代器和外部迭代器
-1.内部迭代器  
-each函数属于内部迭代器，由于内部迭代器的迭代规则已经被提前规定，无法同时迭代2个数组。  
-2.外部迭代器  
+1. 内部迭代器  
+each 函数属于内部迭代器，由于内部迭代器的迭代规则已经被提前规定，无法同时迭代 2 个数组。  
+2. 外部迭代器  
 外部迭代器必须显式地请求迭代下一个元素。  
 ```javascript
 var Iterator = function(obj){
@@ -1156,20 +1153,20 @@ var Iterator = function(obj){
 
 var compare = function(iterator1, iterator2){
   if(iterator1.length !== iterator2.length){
-    console.log('iterator1和iterator2不相等')
+    console.log('iterator1 和 iterator2 不相等')
   }
   while(!iterator1.isDone() && !iterator2.isDone()){
     if(iterator1.getCurrItem() !== iterator2.getCurrItem()){
-      throw new Error('iterator1和iterator2不相等')
+      throw new Error('iterator1 和 iterator2 不相等')
     }
     iterator1.next()
     iterator2.next()
   }
-  console.log('iterator1和iterator2相等')
+  console.log('iterator1 和 iterator2 相等')
 }
 ```
 #### <a name='-1'></a>迭代类数组对象和字面量对象
-只要被迭代的聚合对象拥有length属性而且可以用下标访问，那它就可以被迭代。  
+只要被迭代的聚合对象拥有 length 属性而且可以用下标访问，那它就可以被迭代。  
 #### <a name='-1'></a>倒叙迭代器
 ```javascript
 var reverseEach = function(ary, callback){
@@ -1214,7 +1211,7 @@ var uploadObj = iteratorUploadObj(getActiveUpload, getFlashUploadObj, getFormUpl
 #### <a name='-'></a>发布-订阅模式的作用
 发布订阅模式可以广泛应用于异步编程中，这是一种替代传递回调函数的方案。  在异步编程中使用发布订阅模式，无需过多关注对象在异步运行期间的内部状态，而只需要订阅感兴趣的事件发生点。  
 可以取代对象之间硬编码的通知机制，一个对象不用再显示的调用另一个对象的某个接口。  
-#### <a name='DOM'></a>DOM事件
+#### <a name='DOM'></a>DOM 事件
 ie fireEvent, 标准浏览器用 dispatchEvent.  
 #### <a name='-1'></a>自定义事件
 实现发布-订阅模式  
@@ -1245,7 +1242,7 @@ salesOffices.listen('squareMeter110', function(price){
   console.log('价格=' + price)
 })
 salesOffices.listen('squareMeter110', function(price){
-  console.log('价格changed=' + price)
+  console.log('价格 changed=' + price)
 })
 salesOffices.trigger('squareMeter88', 200000)
 salesOffices.trigger('squareMeter110', 300000)
@@ -1525,14 +1522,14 @@ var Event = (function(){
   return Event
 })()
 ```
-#### <a name='JavaScript-'></a>JavaScript实现发布-订阅模式的便利性
-推模型是指在事件发生时，发布者一次性把所有更改的状态和数据都推送给订阅者。拉模型是发布者仅仅通知订阅者事件已经发生了，此外发布者要提供一些公开的接口供订阅者来主动拉取数据。  JavaScript中，arguments可以很方便地表示参数列表，一般选推模型。   
+#### <a name='JavaScript-'></a>JavaScript 实现发布-订阅模式的便利性
+推模型是指在事件发生时，发布者一次性把所有更改的状态和数据都推送给订阅者。拉模型是发布者仅仅通知订阅者事件已经发生了，此外发布者要提供一些公开的接口供订阅者来主动拉取数据。  JavaScript 中，arguments 可以很方便地表示参数列表，一般选推模型。   
 #### <a name='-1'></a>小结
-优点： 时间上的解耦，对象间的解耦。 帮助实现中介者模式。  mvc、mvvm中发布-订阅模式的参与。  
+优点： 时间上的解耦，对象间的解耦。 帮助实现中介者模式。  mvc、mvvm 中发布-订阅模式的参与。  
 缺点： 创建订阅者本身要消耗一定的时间和内存。 如果过度使用，对象和对象之间的联系也将被深埋背后，会导致程序难以跟踪维护和理解。  
 ### <a name='-1'></a>命令模式
 #### <a name='-1'></a>命令模式的用途
-最常见的应用场景：有时候需要向某些对象发送请求，但并不知道请求的接收者是谁，也不知道被请求的操作是什么。  command对象可以在程序中被四处传递；拥有更长的声明周期；支持撤销、排队等操作。  
+最常见的应用场景：有时候需要向某些对象发送请求，但并不知道请求的接收者是谁，也不知道被请求的操作是什么。  command 对象可以在程序中被四处传递；拥有更长的声明周期；支持撤销、排队等操作。  
 #### <a name='---1'></a>命令模式的例子--菜单程序
 ```javascript
 var setCommand = function(button, command){
@@ -1583,7 +1580,7 @@ var delSubMenuCommand = new DelSubMenuCommand(SubMenu)
 setCommand(button2, addSubMenuCommand)
 setCommand(button3, delSubMenuCommand)
 ```
-#### <a name='JavaScript-1'></a>JavaScript中的命令模式
+#### <a name='JavaScript-1'></a>JavaScript 中的命令模式
 ```javascript
 var bindClick = function(botton, func){
   botton.onclick = func
@@ -1664,9 +1661,9 @@ var MacroCommand = function(){
 ```
 宏命令是命令模式与组合模式的连用产物。  
 #### <a name='-1'></a>智能命令与傻瓜命令
-一般来说，命令模式都会在command对象中保存一个接收者来负责真正执行客户的请求，这种情况下命令对象是“傻瓜式”的，它只负责把客户的请求转交给接收者来执行，这种模式的好处是请求发起者和请求接收者之间尽可能地得到了解耦。  
-策略模式指向地问题域更小，所有策略对象地目标总是一致的，它们只是达到这个目标地不同手段，它们的内部实现是针对“算法”而言的。而智能命令模式指向的问题域更广，command对象解决的目标更具发散性。命令模式还可以完成撤销、排队等功能。  
-JavaScript可以用高阶函数非常方便地实现命令模式。命令模式再JavaScript语言中是一种隐形地模式。  
+一般来说，命令模式都会在 command 对象中保存一个接收者来负责真正执行客户的请求，这种情况下命令对象是“傻瓜式”的，它只负责把客户的请求转交给接收者来执行，这种模式的好处是请求发起者和请求接收者之间尽可能地得到了解耦。  
+策略模式指向地问题域更小，所有策略对象地目标总是一致的，它们只是达到这个目标地不同手段，它们的内部实现是针对“算法”而言的。而智能命令模式指向的问题域更广，command 对象解决的目标更具发散性。命令模式还可以完成撤销、排队等功能。  
+JavaScript 可以用高阶函数非常方便地实现命令模式。命令模式再 JavaScript 语言中是一种隐形地模式。  
 ### <a name='-1'></a>组合模式
 程序设计中有”事物是由相似的子事物构成“类似的思想。组合模式就是用小的子对象来构建更大的对象，而这些小的子对象本身也许是由更小的”孙对象“构成的。  
 #### <a name='-1'></a>回顾宏命令
@@ -1680,9 +1677,9 @@ JavaScript可以用高阶函数非常方便地实现命令模式。命令模式�
 基本对象可以被组合成更复杂的组合对象，组合对象又可以被组合，这样不断递归下去，这棵树的结构可以支持任意多的复杂度。  
 #### <a name='-1'></a>抽象类在组合模式中的作用
 组合模式最大的优点在于可以一致的对待组合对象和基本对象。  
-JavaScript中实现组合模式的难点在于要保证组合对象和叶对象拥有同样的方法，这通常需要用鸭子类型的思想对它们进行接口检查。  在JavaScript中实现组合模式，看起来缺乏一些严谨性，我们的代码算不上安全，但能更快速和自有的开发，这既是JavaScript的缺点，也是它的有点。  
+JavaScript 中实现组合模式的难点在于要保证组合对象和叶对象拥有同样的方法，这通常需要用鸭子类型的思想对它们进行接口检查。  在 JavaScript 中实现组合模式，看起来缺乏一些严谨性，我们的代码算不上安全，但能更快速和自有的开发，这既是 JavaScript 的缺点，也是它的有点。  
 #### <a name='-1'></a>透明性带来的安全问题
-给叶对象也增加add方法，调用时抛出异常来及时提醒客户。  
+给叶对象也增加 add 方法，调用时抛出异常来及时提醒客户。  
 #### <a name='---1'></a>组合模式的例子--扫描文件夹
 ```javascript
 var Folder = function(name){
@@ -1713,15 +1710,15 @@ File.prototype.scan = function(){
 var folder = new Folder('学习资料')
 var folder1 = new Folder('Javascript')
 var folder2 = new Folder('jQuery')
-var file1 = new File('Javascript设计模式域开发实践')
-var file1 = new File('精通jQuery')
+var file1 = new File('Javascript 设计模式域开发实践')
+var file1 = new File('精通 jQuery')
 var file1 = new File('重构与模式')
 ```
 #### <a name='-1'></a>一些值得注意的地方
-1.组合模式不是父子关系  组合模式是一种HAS-A(聚合)的关系，而不是IS-A。  
-2.对叶对象操作的一致性  只有用一致的方式对待列表中的每个叶对象的时候，才适合使用组合模式。(发放过节费vs发送生日礼物)  
-3.双向映射关系  要考虑对象之间的关系并不是严格意义上的层次结构，在这种情况下，是不适合使用组合模式的。 可以引入中介者模式来管理这些对象。  
-4.用职责链模式提高组合模式性能   
+1. 组合模式不是父子关系  组合模式是一种 HAS-A（聚合）的关系，而不是 IS-A。  
+2. 对叶对象操作的一致性  只有用一致的方式对待列表中的每个叶对象的时候，才适合使用组合模式。（发放过节费 vs 发送生日礼物）  
+3. 双向映射关系  要考虑对象之间的关系并不是严格意义上的层次结构，在这种情况下，是不适合使用组合模式的。 可以引入中介者模式来管理这些对象。  
+4. 用职责链模式提高组合模式性能   
 #### <a name='-1'></a>引用父对象
 有时可能需要需要让请求从子节点往父节点上冒泡传递。当删除某个文件时实际上是从这个文件所在的上层文件夹中删除该文件的。  
 ```javascript
@@ -1781,19 +1778,19 @@ Beverage.prototype.init = function(){
 ```
 #### <a name='-1'></a>抽象类
 具体类 可以被实例化， 抽象类 不能被实例化。  除了用于向上转型，抽象类也可以表示一种契约。  
-隐藏对象的类型在JavaScript中并不重要。  
+隐藏对象的类型在 JavaScript 中并不重要。  
 #### <a name='-1'></a>模板方法模式的使用场景
 HttpServlet  
-构建UI组件 初始化一个div容器；通过ajax请求拉取相应的数据；把数据渲染到div容器里面，完成组件的构造；通知用户组件渲染完毕。  
+构建 UI 组件 初始化一个 div 容器；通过 ajax 请求拉取相应的数据；把数据渲染到 div 容器里面，完成组件的构造；通知用户组件渲染完毕。  
 #### <a name='-1'></a>钩子方法
-放置(hook)是隔离变化的一种常见手段。 钩子方法的返回结果决定了模板方法后面部分的执行步骤，也就是程序接下来的方向，这样程序就拥有了变化的可能。  
+放置 (hook) 是隔离变化的一种常见手段。 钩子方法的返回结果决定了模板方法后面部分的执行步骤，也就是程序接下来的方向，这样程序就拥有了变化的可能。  
 ```javascript
 var Beverage = function(){}
 Beverage.prototype.boilWater = function(){
   console.log('把水煮沸')
 }
 Beverage.prototype.brew = function(){
-  throw new Error('子类必须重写brew')
+  throw new Error('子类必须重写 brew')
 }
 Beverage.prototype.pourInCup = function(){throw 'rewrite cup'}
 Beverage.prototype.addCondiments = function(){throw 'rewrite addc'}
@@ -1837,13 +1834,13 @@ var Beverage = function(param){
     console.log('把水煮沸')
   }
   var brew = param.brew || function(){
-    throw new Error('必须传递brew')
+    throw new Error('必须传递 brew')
   }
   var pourInCup = param.pourInCup || function(){
-    throw new Error('必须传入pourInCup')
+    throw new Error('必须传入 pourInCup')
   }
   var addCondiments = param.addCondiments || function(){
-    throw new Error('必须传入addCondiments')
+    throw new Error('必须传入 addCondiments')
   }
   var F = function(){}
   F.prorotyp.init = function(){
@@ -1856,18 +1853,18 @@ var Beverage = function(param){
 }
 ```
 #### <a name='-1'></a>小结
-模板方法模式是一种典型的通过封装变化提高系统扩展性的设计模式。  但在JavaScript中，高阶函数是更好的选择。  
+模板方法模式是一种典型的通过封装变化提高系统扩展性的设计模式。  但在 JavaScript 中，高阶函数是更好的选择。  
 ### <a name='-1'></a>享元模式
 享元模式一种用于性能优化的模式，核心是运用共享技术来有效支持特大量细粒度的对象。 如果系统中因创建了大量类似的对象而导致内存占用过高，享元模式就非常有用。  
 #### <a name='-1'></a>内部状态与外部状态
-享元模式要求将对象的属性划分为内部状态与外部状态(状态通常在这里指属性)。享元模式的目标是尽量减少共享对象的数量。  
+享元模式要求将对象的属性划分为内部状态与外部状态（状态通常在这里指属性）。享元模式的目标是尽量减少共享对象的数量。  
 如何划分内部状态和外部状态：  
 · 内部状态存储于对象内部；  · 内部状态可以被一些对象共享；  · 内部状态独立于具体的场景，通常不会改变。  · 外部状态取决于具体的场景，并根据场景而变化，外部状态不能被共享。   
 剥离了外部状态的对象称为共享对象，外部状态在必要时被传入共享对象来组装成一个完整的对象。 享元模式是一种用时间换空间的优化模式。  
 #### <a name='-1'></a>享元模式的通用结构
 用工厂对象创建真正被需要的共享对象；用管理器记录对象相关外部状态。  
 #### <a name='-1'></a>文件上传的例子
-uploadType作为内部状态  
+uploadType 作为内部状态  
 ```javascript
 var Upload = function(uploadType){
   this.uploadType = uploadType
@@ -1900,7 +1897,7 @@ var uploadManager = (function(){
     add: function(id, uploadType, fileName, fileSize){
       var flyWeightObj = UploadFactory.create(uploadType)
       var dom = document.createElement('div')
-      dom.innerHTML = '<span>文件名称：'+fileName+',文件大小：'+fileSize+'</span>'+
+      dom.innerHTML = '<span>文件名称：'+fileName+', 文件大小：'+fileSize+'</span>'+
         '<button class="delFile">删除</button>'
       dom.querySelector('.delFile').onclick = function(){
         flyWeightObj.delFile(id)
@@ -1949,8 +1946,8 @@ var UploadFactory = (function(){
 ```
 **没有外部状态的享元**  不是一个纯粹的享元模式。  
 #### <a name='-1'></a>对象池
-对象池维护一个装载空闲对象的池子，如果需要对象的时候，不是直接new，而是转从对象池里获取。如果对象池没有空闲对象则创建新对象，当获取的对象完成职责后再进入池子等待被下次获取。  
-HTTP连接池和数据库连接池都是对象池技术代表应用。  
+对象池维护一个装载空闲对象的池子，如果需要对象的时候，不是直接 new，而是转从对象池里获取。如果对象池没有空闲对象则创建新对象，当获取的对象完成职责后再进入池子等待被下次获取。  
+HTTP 连接池和数据库连接池都是对象池技术代表应用。  
 **对象池实现**  
 ```javascript
 var objectPoolFactory = function(createObjFn){
@@ -1968,7 +1965,7 @@ var objectPoolFactory = function(createObjFn){
   }
 }
 
-// 装载iframe
+// 装载 iframe
 var iframe = document.createElement('iframe')
 document.body.appendChild(iframe)
 iframe.onload = function(){
@@ -1987,7 +1984,7 @@ iframe2.src = 'http://QQ.com'
 请求发送者只需要找到链中的第一个节点，从而弱化了发送者和一组接收者之间的强联系。  
 #### <a name='-1'></a>实际开发中的职责链模式
 ```javascript
-// 订金500 返100，  订金200 返50，  普通常规 且缺货
+// 订金 500 返 100，  订金 200 返 50，  普通常规 且缺货
 var order = function(orderType, pay, stock){
   if(orderType === 1){
     if(pay === true){
@@ -2068,7 +2065,7 @@ Chain.prototype.next = function(){
   return this.successor && this.successor.passRequest.apply(this.successor, arguments)
 }
 ```
-#### <a name='AOP'></a>用AOP实现职责链
+#### <a name='AOP'></a>用 AOP 实现职责链
 ```javascript
 Function.Prototype.after = function(fn){
   var self = this
@@ -2085,7 +2082,7 @@ var order = order500yuan.after(order200yuan).after(orderNormal)
 如果链条太长会对性能有较大影响  
 ### <a name='-1'></a>中介者模式
 中介者模式用于解释对象与对象之间的耦合关系。  
-1.机场指挥塔，(调停者)；  2.博彩公司  
+1. 机场指挥塔，（调停者）；  2. 博彩公司  
 #### <a name='---1'></a>中介者模式的例子--泡泡堂游戏
 ```javascript
 // function Player(name){
@@ -2174,7 +2171,7 @@ player4.die()
 ```
 **玩家增多带来的困扰** 解除队伍添加到别的队伍，红色玩家可以突然变成蓝色玩家，这就不再仅仅是循环解决的问题了。  
 **用中介者模式改造**  
-· 利用发布-订阅模式。  · 在playerDirector中开放一些接收消息的接口。  
+· 利用发布-订阅模式。  · 在 playerDirector 中开放一些接收消息的接口。  
 ```javascript
 // 
 var playerDirector = (function(){
@@ -2236,7 +2233,7 @@ var playerDirector = (function(){
 })()
 ```
 #### <a name='---1'></a>中介者模式的例子--购买商品
-遇到至少5个节点   · 下拉选择colorSelect;  · 文本输入框numberInput； · 展示颜色信息colorInfo； · 展示购买数量信息numberInfo；  · 决定下一步操作的按钮。  
+遇到至少 5 个节点   · 下拉选择 colorSelect;  · 文本输入框 numberInput； · 展示颜色信息 colorInfo； · 展示购买数量信息 numberInfo；  · 决定下一步操作的按钮。  
 ```javascript
 var goods = {
   'red|32G': 3,
@@ -2334,7 +2331,7 @@ plane.fire()
 这种给对象动态增加职责的方式，并没有真正的改动对象自身，而是将对象放入另一个对象之中，这些对象以一条链的方式进行引用，形成一个聚合对象。 当请求达到链中某个对象这个对象执行自身的操作，随后把请求转发给链中的下一个对象。  
 #### <a name='-1'></a>装饰着也是包装器
 装饰者模式将一个对象嵌入另一个对象之中，实际上相当于这个对象被另一个对象包装起来，形成一条包装链。请求随着这条链依次传递到所有的对象，每个对象都有处理这条请求的机会。  
-#### <a name='JavaScript-1'></a>JavaScript的装饰者
+#### <a name='JavaScript-1'></a>JavaScript 的装饰者
 ```javascript
 var plane = {
   fire: function(){
@@ -2370,9 +2367,9 @@ window.onload = function(){
 }
 ```
 存在的问题：
-- 必须维护_onload这个中间变量，如果函数的装饰链较长或需要装饰的函数变多，这些中间变量的数量也会越来越多
-- this被劫持的问题， 需要手动传this
-#### <a name='AOP-1'></a>用AOP装饰函数
+- 必须维护_onload 这个中间变量，如果函数的装饰链较长或需要装饰的函数变多，这些中间变量的数量也会越来越多
+- this 被劫持的问题， 需要手动传 this
+#### <a name='AOP-1'></a>用 AOP 装饰函数
 ```javascript
 Function.prototype.before = function(beforefn){
   var __self = this
@@ -2405,9 +2402,9 @@ var a = before(
 a = before(a, function(){console.log(1)})
 a()
 ```
-#### <a name='AOP-1'></a>AOP的应用实例
+#### <a name='AOP-1'></a>AOP 的应用实例
 **数据统计上报**  
-分离业务代码和数据统计代码，无论在什么语言中，都是AOP的经典应用之一。  
+分离业务代码和数据统计代码，无论在什么语言中，都是 AOP 的经典应用之一。  
 ```javascript
 Function.prototype.after = function(afterfn){
   //...
@@ -2421,7 +2418,7 @@ var log = function(){
 showLogin = showLogin.after(log)
 document.getElementById('button').onclick = showLogin
 ```
-**用AOP动态改变函数的参数**  
+**用 AOP 动态改变函数的参数**  
 ```javascript
 var getToken = function(){
   return 'Token'
@@ -2454,7 +2451,7 @@ Light.prototype.buttonWasPressed = function(){
   }
 }
 ```
-· 违反开放-封闭原则； · 所有跟状态有关的行为都被封装在buttonWasPressed方法里(处理的事情多了他会很庞大)；  · 大量if else语句，难以阅读。  
+· 违反开放-封闭原则； · 所有跟状态有关的行为都被封装在 buttonWasPressed 方法里（处理的事情多了他会很庞大）；  · 大量 if else 语句，难以阅读。  
 **状态模式改进**  
 状态模式会把事物的每种状态都封装成单独的类，跟此种状态有关的行为都被封装在这个类的内部。  
 ```javascript
@@ -2508,10 +2505,10 @@ light.init()
 #### <a name='-1'></a>状态模式的定义
 > \<GoF\> 允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。  
 #### <a name='-1'></a>缺少抽象类的变通方式
-JavaScript既不支持抽象类也没有接口的概念。如果忘记实现状态子类(buttonWasPressed)，则会抛出异常。  
+JavaScript 既不支持抽象类也没有接口的概念。如果忘记实现状态子类 (buttonWasPressed)，则会抛出异常。  
 #### <a name='---1'></a>另一个状态模式实例--文件上传
 文件上传程序中有扫描、正在上传、暂停、上传成功、上传失败； 音乐播放器可分为加载中、正在播放、暂停、播放完毕。  
-· 文件在扫描状态中，是不能进行任何操作的。扫描完成根据文件md5值判断若存在于服务器则直接跳到上传完成状态。...  
+· 文件在扫描状态中，是不能进行任何操作的。扫描完成根据文件 md5 值判断若存在于服务器则直接跳到上传完成状态。...  
 · 上传中可暂停、继续上传。  
 · 扫描和上传过程中点击删除无效，在暂停、上传完成、上传失败之后才能删除。  
 在页面放置一个用于上传的插件对象
@@ -2523,7 +2520,7 @@ var plugin = (function(){
   plugin.sign = function(){
     console.log('开始文件扫描')
   }
-  //略...
+  //略。..
   document.body.appendChild(plugin)
   return plugin
 })()
@@ -2647,10 +2644,10 @@ Upload.prototype.del = function(){
 var StateFactory = (function(){
   var State = function(){}
   State.prototype.clickHandler1 = function(){
-    throw new Error('子类必须重写父类的clickHandler1方法')
+    throw new Error('子类必须重写父类的 clickHandler1 方法')
   }
   State.prototype.clickHandler2 = function(){
-    throw new Error('子类必须重写父类的clickHandler2方法')
+    throw new Error('子类必须重写父类的 clickHandler2 方法')
   }
   return function(param){
     var F = function(uploadObj){
@@ -2665,7 +2662,7 @@ var StateFactory = (function(){
 })()
 var SignState = StateFactory({
   clickHandler1: function(){
-    console.log('扫描中，点击无效...')
+    console.log('扫描中，点击无效。..')
   },
   clickHandler2: function(){
     console.log('文件正在上传中，不能删除')
@@ -2704,7 +2701,7 @@ var ErrorState = StateFactory({
   }
 })
 
-var uploadObj = new Upload('JavaScript设计模式')
+var uploadObj = new Upload('JavaScript 设计模式')
 uploadObj.init()
 window.external.upload = function(state){
   uploadObj[state]()
@@ -2720,18 +2717,18 @@ setTimeout(function(){
 #### <a name='-1'></a>状态模式的优缺点
 优点：  
 - 状态模式定义了状态与行为之间关系并将他们封装在一个类。通过增加新的状态类，很容易增加新的状态和转换。
-- 避免Context无限膨胀，状态切换的逻辑被分布在状态中，也去掉了Context中原本过多的条件分支。
+- 避免 Context 无限膨胀，状态切换的逻辑被分布在状态中，也去掉了 Context 中原本过多的条件分支。
 - 用对象代替字符串来记录当前状态，使得状态的切换更加一目了然。
-- Context中的请求动作和状态类中封装的行为可以非常容易地独立变化而互不影响。
+- Context 中的请求动作和状态类中封装的行为可以非常容易地独立变化而互不影响。
 
 缺点是会在系统中定义许多状态类， 逻辑分散，无法在一个地方就看出整个状态机的逻辑。  
 #### <a name='-1'></a>状态模式中的性能优化点
-· 两种选择管理state对象的创建和销毁。 一是仅当state对象被需要时才创建并随后销毁(state对象较大)； 一是一开始就创建好所有的状态对象，并且始终不销毁它们(状态改变很频繁)。  
-· 各Context对象可以共享一个state对象。  
+· 两种选择管理 state 对象的创建和销毁。 一是仅当 state 对象被需要时才创建并随后销毁 (state 对象较大）； 一是一开始就创建好所有的状态对象，并且始终不销毁它们（状态改变很频繁）。  
+· 各 Context 对象可以共享一个 state 对象。  
 #### <a name='-1'></a>状态模式和策略模式的关系
 相同点： 它们都有一个上下文、一些策略或者状态类，上下文把请求委托给这些类来执行  
 区别： 策略模式中各个策略类之间是平等又平行的，它们之间没有任何联系；状态模式中，状态和状态对应的行为是早已被封装好的，状态之间的切换也早被规定完成，“改变行为”这件事发生在状态模式内部。  
-#### <a name='JavaScript-1'></a>JavaScript版本的状态机
+#### <a name='JavaScript-1'></a>JavaScript 版本的状态机
 ```javascript
 var Light = function(){
   this.currState = FSM.off
@@ -2765,7 +2762,7 @@ var FSM = {
 var light = new Light()
 light.init()
 ```
-delegate函数
+delegate 函数
 ```javascript
 var delegate = function(client, delegation){
   return {
@@ -2830,11 +2827,11 @@ button.onclick = function(){
 }
 ```
 #### <a name='-1'></a>实际项目中的其它状态机
-下拉菜单hover动作有显式、悬浮、隐藏等； TCP请求有建立连接、监听、关闭等； 格斗游戏人物有攻击、防御、跳跃、跌倒等。 状态机在游戏开发中有广泛用途。  
+下拉菜单 hover 动作有显式、悬浮、隐藏等； TCP 请求有建立连接、监听、关闭等； 格斗游戏人物有攻击、防御、跳跃、跌倒等。 状态机在游戏开发中有广泛用途。  
 ### <a name='-1'></a>适配器模式
 适配器模式的作用是解决两个软件实体间的接口不兼容的问题。 别名包装器。  
 #### <a name='-1'></a>现实中的适配器
-1 港式插头转换器 2 电源适配器 3 USB转接口  
+1 港式插头转换器 2 电源适配器 3 USB 转接口  
 #### <a name='-1'></a>适配器模式的应用
 ```javascript
 var addressAdapter = function(oldAddressfn){
@@ -2854,11 +2851,11 @@ render(addressAdapter(getGuangdongCity))
 ## <a name='-1'></a>设计原则和编程技巧
 这部分我们将学习一些面向对象的设计原则，前辈总结的设计原则通常指 单一职责原则、里氏替换原则、依赖倒置原则、接口隔离原则、合成复用原则和最少知识原则。  
 ### <a name='-1'></a>单一职责原则
-就一个类而言，应该仅有一个引起它变化的原因。 JavaScript中更多的是被运用在对象或者方法级别上。 单一职责原则(SRP)的职责被定义为“引起变化的原因”。 SRP原则体现为：一个对象(方法)只做一件事情。  
-#### <a name='SRP'></a>设计模式中的SRP原则
-SRP原则有广泛运用 如代理模式、迭代器模式、单例模式和装饰者模式。  
+就一个类而言，应该仅有一个引起它变化的原因。 JavaScript 中更多的是被运用在对象或者方法级别上。 单一职责原则 (SRP) 的职责被定义为“引起变化的原因”。 SRP 原则体现为：一个对象（方法）只做一件事情。  
+#### <a name='SRP'></a>设计模式中的 SRP 原则
+SRP 原则有广泛运用 如代理模式、迭代器模式、单例模式和装饰者模式。  
 __1 代理模式__   
-通过增加虚拟代理把预加载图片的职责放到代理对象中，而本体仅仅负责往页面中添加img标签
+通过增加虚拟代理把预加载图片的职责放到代理对象中，而本体仅仅负责往页面中添加 img 标签
 ```javascript
 var myImage = (function(){
   var imgNode = document.createElement('img')
@@ -2885,7 +2882,7 @@ var proxyImage = (function(){
 proxyImage.setSrc('http://imgcache.qq.com/music/photo/sfeisdfeEDEde.jpg')
 ```
 __2 迭代器模式__  
-遍历集合往页面添加div  
+遍历集合往页面添加 div  
 ```javascript
 var appendDiv = function(data){
   for(var i=0, l=data.length; i<l; i++){
@@ -2896,7 +2893,7 @@ var appendDiv = function(data){
 }
 appendDiv([1, 2, 3, 4, 5, 6])
 ```
-如果数据从array变成object，那遍历data的代码会出现问题，这时候必须修改appendDiv里的代码。  
+如果数据从 array 变成 object，那遍历 data 的代码会出现问题，这时候必须修改 appendDiv 里的代码。  
 ```javascript
 var each = function(obj, callback){
   var value,
@@ -2952,31 +2949,31 @@ Function.prototype.after = function(afterfn){
   //...
 }
 ```
-SRP原则的应用难点就是如何去分离职责。  
+SRP 原则的应用难点就是如何去分离职责。  
 #### <a name='-1'></a>何时应该分离职责
 要明确并不是所有职责都应该一一分离。 一方面随着需求变化有职责是同时变化那就不需要分离他们。 另一方面职责变化轴线仅当他们确定发生变化时才有意义，即使职责被耦合在一起，但他们没有发生改变征兆则没必要分离。  
-#### <a name='SRP-1'></a>违反SRP原则
-jQuery中的attr既负责赋值又负责取值，这对于维护者带来一些苦难，但却简化了用户的使用。  
+#### <a name='SRP-1'></a>违反 SRP 原则
+jQuery 中的 attr 既负责赋值又负责取值，这对于维护者带来一些苦难，但却简化了用户的使用。  
 在方便性与稳定性之间要有一些取舍。  
-#### <a name='SRP-1'></a>SRP原则的优缺点
+#### <a name='SRP-1'></a>SRP 原则的优缺点
 优点是 降低了单个类或者对象的复杂度，有助于代码复用和进行单元测试。  
 缺点是 会增加编写代码的复杂度。  
 ### <a name='-1'></a>最少知识原则
-最少知识原则(LKP)说的是一个软件实体应当尽可能少的与其它实体发生相互作用。 这里的软件实体是一个广义概念，包括对象、 系统、类、模块、函数、变量等。   
+最少知识原则 (LKP) 说的是一个软件实体应当尽可能少的与其它实体发生相互作用。 这里的软件实体是一个广义概念，包括对象、 系统、类、模块、函数、变量等。   
 #### <a name='-1'></a>减少对象之间的联系
 最少知识原则要求我们在设计程序时，应当尽量减少对象之间的交互。 如果两个对象间不必彼此直接通信，那么这两个对象就不要发生直接的相互联系。   
 #### <a name='-1'></a>设计模式中的最少知识原则
 __1 中介者模式__  
 让所有相关的对象都通过中介者对象来通信，而不是互相引用。  
 __2 外观模式__
-在JavaScript中使用场景不多。 外观模式主要是为了子系统中的一组接口提供一个一致的界面，外观模式定义了高层接口，使子系统更加容易使用。  
+在 JavaScript 中使用场景不多。 外观模式主要是为了子系统中的一组接口提供一个一致的界面，外观模式定义了高层接口，使子系统更加容易使用。  
 #### <a name='-1'></a>封装在最少知识原则中的体现
-我们可以让对象只暴露必要的接口，让对象之间的联系限制在最小的范围之内。同时，封装也用来限制变量的作用域。在JavaScript中对变量作用域的规定是：
-- 变量在全局声明，或者在代码任何位置隐式声明(不用var)，则该变量在全局可见
-- 变量在函数内显式声明(使用var)，则在函数内可见
+我们可以让对象只暴露必要的接口，让对象之间的联系限制在最小的范围之内。同时，封装也用来限制变量的作用域。在 JavaScript 中对变量作用域的规定是：
+- 变量在全局声明，或者在代码任何位置隐式声明（不用 var)，则该变量在全局可见
+- 变量在函数内显式声明（使用 var)，则在函数内可见
 最少知识原则也叫迪米特法则。  
 ### <a name='--1'></a>开放-封闭原则
-> 软件实体(类、模块、函数)等应该是可以扩展的，但是不可修改。  
+> 软件实体（类、模块、函数）等应该是可以扩展的，但是不可修改。  
 #### <a name='-1'></a>开放和封闭
 开放-封闭原则的思想：当需要改变一个程序的功能或者这个程序增加新功能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码。  
 #### <a name='-1'></a>用对象的多态性消除条件分支
@@ -2986,7 +2983,7 @@ __2 外观模式__
 __1 放置挂钩__  
 我们在程序有可能发生变化的地方放置挂钩，挂钩的返回结果决定了程序的下一步走向。  
 __2 使用回调函数__
-在JavaScript版本的设计模式中，策略模式和命令模式等都可以用回调函数轻松实现。  
+在 JavaScript 版本的设计模式中，策略模式和命令模式等都可以用回调函数轻松实现。  
 ```javascript
 var arrayMap = function(ary, callback){
   var i=0,
@@ -3028,8 +3025,8 @@ console.log(b)
 第一种接口，通过主动暴露接口通信，可以隐藏软件系统内部的工作细节。  
 第二种接口，一些语言提供的关键字。  
 第三种接口，“面向接口编程”中的接口 _接口是对象能响应的请求的集合。_   
-JavaScript中除了number、string、boolean等基本数据类型外，其他对象可以被看成“天生”被“向上转型”成了Object类型。  
-#### <a name='typescript'></a>typescript版本的命令模式
+JavaScript 中除了 number、string、boolean 等基本数据类型外，其他对象可以被看成“天生”被“向上转型”成了 Object 类型。  
+#### <a name='typescript'></a>typescript 版本的命令模式
 ```typescript
 interface Command{
   execute: Function;
@@ -3123,9 +3120,9 @@ var setUserInfo = function(obj){
 }
 ```
 #### <a name='-1'></a>尽量减少参数数量
-`var draw = function(width, height, square){}` square应当再函数内部计算。(由传入的参数加一定规则)  
+`var draw = function(width, height, square){}` square 应当再函数内部计算。（由传入的参数加一定规则）  
 #### <a name='-1'></a>少用三目运算符
-如果条件分支逻辑简单且清晰，无碍我们使用三目运算符。 当逻辑分支非常复杂，if else语句的好处-阅读相对容易、修改方便等。  
+如果条件分支逻辑简单且清晰，无碍我们使用三目运算符。 当逻辑分支非常复杂，if else 语句的好处-阅读相对容易、修改方便等。  
 #### <a name='-1'></a>合理使用链式调用
 让方法调用结束后返回对象自身。 如果链条结构相对稳定，后期不易发生修改，那么使用链式调用无可厚非。但如果该链条很容易发生变化，导致调试和维护困难，则建议普通调用的形式。  
 #### <a name='-1'></a>分解大型类
@@ -3158,7 +3155,7 @@ var spirit = new Spirit('RYU')
 spirit.attack('waveBoxing')
 spirit.attack('whirlKick')
 ```
-#### <a name='return'></a>用return退出多重循环
+#### <a name='return'></a>用 return 退出多重循环
 ```javascript
 var print = function(i){
   console.log(i)
@@ -3174,38 +3171,3 @@ var func = function(){
 }
 func()
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

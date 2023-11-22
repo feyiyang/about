@@ -23,11 +23,12 @@ import { SITE_TITLE } from '../config';
 	z-index: 1;
 	width: 100%;
 	height: @main_hei;
+	// background-color: #fff;
 	font-size: 16px;
 	.header_inner {
 		.wrap_inner;
-		background-color: @bg_grey;
-		box-shadow: 0 1px 3px rgba(160, 160, 175, 0.2);
+		background-color: rgba(226, 228, 243, 56%);
+		// box-shadow: 0 1px 3px rgba(160, 160, 175, 0.2);
 	}
 	nav{
 		display: flex;
@@ -41,7 +42,7 @@ import { SITE_TITLE } from '../config';
 		text-align: center;
 		line-height: @main_hei;
 		color: @text_blank;
-		background-color: @bg_blue;
+		// background-color: @bg_blue;
 		&:not(:last-of-type)::after{
 			content: ' ';
 			position: absolute;

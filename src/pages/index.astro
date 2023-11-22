@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro'
+import Header from "../components/Header.astro";
 import Footer from '../components/Footer.astro'
 import { getCollection } from 'astro:content'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config'
@@ -28,6 +29,7 @@ const remarkEntries = await getCollection('remark', (data) => {
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
+    <Header />
     <main class="main">
       <section class="viewsec">
         <div class="weather_wrap">
@@ -140,7 +142,7 @@ const remarkEntries = await getCollection('remark', (data) => {
       .main {
         width: 930px;
         margin: auto;
-        padding-top: 10px;
+        padding-top: 60px;
         .demosec {
           width: 620px;
           .wraper;
@@ -327,6 +329,7 @@ const remarkEntries = await getCollection('remark', (data) => {
       function showPosition(position) {
         positionNum++
 
+        console.log(position)
         $.ajax({
           url: 'mweather.json?city=' + position.adcode,
           success: function (data) {

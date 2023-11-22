@@ -15,7 +15,6 @@ import netlify from '@astrojs/netlify/functions';
 import sitemap from '@astrojs/sitemap';
 import vue from "@astrojs/vue";
 
-// https://astro.build/config
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,9 +22,8 @@ export default defineConfig({
   integrations: [mdx({
     rehypePlugins: [rehypeKatex]
   }), sitemap(), vue()],
-  // output: 'static',
-  // adapter: netlify(),
-  // scopedStyleStrategy: 'where',
+  output: 'hybrid',
+  adapter: netlify(),
   markdown: {
     remarkPlugins: [remarkMath, supersub, remarkTextr, remarkToc, remarkReadingTime],
     rehypePlugins: [rehypeMathJaxSvg]
