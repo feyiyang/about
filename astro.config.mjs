@@ -29,5 +29,3 @@ export default defineConfig({
     rehypePlugins: [rehypeMathJaxSvg]
   }
 });
-
-// 餐饮，交通，网购，学习，礼物
