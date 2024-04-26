@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+a {
+  color: inherit;
+}
 .section_title {
   height: 30px;
   font-size: 16px;
@@ -44,14 +47,15 @@
   background-color: #ffd590;
 }
 .wrapper {
-  background: url(../assets/bgsen.jpg) right bottom;
-  width: 652px;
-  background-color: #fff;
-  margin: auto;
   position: relative;
+  width: 720px;
+  margin: auto;
+  padding: 10px 0;
+  background: url(../assets/BG/20220622144334_920b4.jpeg) right bottom;
+  background-color: #407da6;
+  background-size: contain;
   font-size: 14px;
   line-height: 1.6;
-  padding: 10px 0;
 }
 .wrapper h4 {
   font-size: 14px;
@@ -59,9 +63,10 @@
 }
 .wrapper .header,
 .wrapper .works,
-.wrapper .projects {
-  background-color: rgba(250, 250, 250, 0.9);
+.wrapper .projects,
+.wrapper .edus {
   padding: 10px;
+  background-color: rgba(250, 250, 250, 0.85);
 }
 .header .info .info_inner {
   padding: 5px 10px 10px;

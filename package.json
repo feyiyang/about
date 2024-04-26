@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^2.0.3",
-    "@astrojs/netlify": "^4.1.0",
+    "@astrojs/netlify": "^4.1.1",
     "@astrojs/sitemap": "^3.0.4",
     "@astrojs/vercel": "^6.1.2",
     "@astrojs/vue": "^4.0.7",
