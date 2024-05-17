@@ -43,11 +43,13 @@ const remarkEntries = await getCollection('remark', (data) => {
         </p>
         <div class="tags">
           {
-            tags.map((t) => (
-              <a class="tag" href={'/tags/' + t}>
-                {t}
-              </a>
-            ))
+            tags.map((t) => 
+              <>
+                <a class="tag" href={'/tags/' + t}>
+                  {t}
+                </a>
+              </>
+            )
           }
         </div>
         <div class="remarks">
@@ -84,13 +86,13 @@ const remarkEntries = await getCollection('remark', (data) => {
             <span class="demo_img">
               <img class="cov" src="/images/music_demo.png" alt="仿QQ音乐" />
               <p class="extra">
-                {['vite', 'vue3', 'ts', 'acro-design'].map((v) => <i>{v}</i>)}
+                {['vue3', 'acro-design', 'ts', 'vite'].map((v) => <i>{v}</i>)}
               </p>
             </span>
           </div>
           <div class="demo">
             <h3>
-              <a href="https://sadmin.feyiyang.work/" class="demolink" target="_blank">后台管理系统</a>
+              <a href="https://sadmin.feyiyang.work/" class="demolink" target="_blank">后台管理</a>
               <a href="https://github.com/feyiyang/solid-admin" class="hub" target="_blank">
                 GitHub <img src="/images/link.svg" width="12" />
               </a>
@@ -116,7 +118,7 @@ const remarkEntries = await getCollection('remark', (data) => {
             </h3>
             <span class="demo_img">
               <img class="cov" src="/images/boomgamer.png" alt="仿炸弹人游戏" />
-              <p class="extra"><i>HTML+CSS+JS</i></p>
+              <p class="extra"><i>HTML+JS+CSS</i></p>
             </span>
           </div>
         </div>
@@ -219,7 +221,7 @@ const remarkEntries = await getCollection('remark', (data) => {
               }
             }
             .extra {
-              overflow: hidden
+              overflow: hidden;
               color: @text_grey;
               line-height: 1.2;
               white-space: nowrap;
